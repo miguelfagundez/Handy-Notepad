@@ -50,6 +50,7 @@ object Constants {
     // Format, permissions, and other general uses
     //***********************************************************
     const val DATE_FORMAT = "EEE, d MMM yyyy HH:mm"
+    const val DATE_PICTURE_FORMAT = "yyyyMMddHHmmss"
     const val REQUEST_CODE_CAMERA = 2
     const val REQUEST_CODE_GALLERY = 4
     const val PERMISSION_CODE = 135

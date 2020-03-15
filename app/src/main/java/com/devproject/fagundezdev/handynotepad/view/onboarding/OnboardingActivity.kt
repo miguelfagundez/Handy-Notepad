@@ -10,6 +10,14 @@ import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.adapters.OnboardingAdapter
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 
+/*************************************************
+ * Activity - OnboardingActivity
+ * This activity will handle fragments that
+ * shows basic information about app's features
+ * @author: Miguel Fagundez
+ * @date: March 06th, 2020
+ * @version: 1.0
+ * ***********************************************/
 class OnboardingActivity : AppCompatActivity(), InfoOneFragment.callPagerOne, InfoTwoFragment.callPagerTwo,
     InfoThreeFragment.callPagerThree, RegisterFragment.callPagerRegister {
 

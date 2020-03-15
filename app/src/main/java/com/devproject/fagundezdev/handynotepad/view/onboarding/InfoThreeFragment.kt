@@ -10,6 +10,14 @@ import com.devproject.fagundezdev.handynotepad.R
 import kotlinx.android.synthetic.main.fragment_three_onboarding.*
 import kotlinx.android.synthetic.main.fragment_two_onboarding.*
 
+/********************************************
+ * Fragment - InfoThreeFragment
+ * This fragment shows info about:
+ * - Save your notes in external memory
+ * @author: Miguel Fagundez
+ * @date: March 08th, 2020
+ * @version: 1.0
+ * *******************************************/
 class InfoThreeFragment : Fragment() {
 
     lateinit var callThree : callPagerThree

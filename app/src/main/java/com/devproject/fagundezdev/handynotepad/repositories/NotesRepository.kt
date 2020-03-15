@@ -17,14 +17,17 @@ import com.devproject.fagundezdev.handynotepad.utils.Constants
  * *******************************************/
 class NotesRepository(private val notesDao:NotesDAO?) {
 
-    val TAG = "Test"
-    var listNotes : LiveData<List<Notes>>? = notesDao?.getAllNotes()
+    val TAG = "NotesRepository"
+    var listNotes : LiveData<List<Notes>>? = null
     var numberNotes = listNotes?.value?.size?:0
 
     init {
-
+        listNotes = notesDao?.getAllNotes()
     }
 
+    //**********************************
+    // Creat note option for utils uses
+    //**********************************
     fun createNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
                    priority: Int, selected: Boolean, creationDate: String, editDate: String) : Notes {
 
@@ -130,6 +133,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         NoteSharedPreferences.write(Constants.IS_LOGGED_IN, value)
     }
 
+    // Asking if user is already logged
     fun isLogged(): Boolean? {
         return NoteSharedPreferences.readBoolean(Constants.IS_LOGGED_IN)
     }

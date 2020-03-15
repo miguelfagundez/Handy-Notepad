@@ -9,14 +9,14 @@ import com.devproject.fagundezdev.handynotepad.view.home.HomeActivity
 import com.devproject.fagundezdev.handynotepad.view.onboarding.OnboardingActivity
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 
-/*
+/*************************************************
 * Class name: SplashActivity
 * I handle initial variables/components
 * I validate the current state of the application
 *   1: First time -> Open OnBoardinActivity
 *   2: No Logging -> Login Activity
 *   3: Logging Successfully -> Notes List Activity
-* */
+* ************************************************/
 class SplashActivity : AppCompatActivity() {
 
     val TAG = "SplashActivity"

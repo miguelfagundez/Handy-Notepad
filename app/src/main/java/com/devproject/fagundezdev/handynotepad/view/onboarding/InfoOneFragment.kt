@@ -9,6 +9,14 @@ import androidx.fragment.app.Fragment
 import com.devproject.fagundezdev.handynotepad.R
 import kotlinx.android.synthetic.main.fragment_one_onboarding.*
 
+/********************************************
+ * Fragment - InfoOneFragment
+ * This fragment shows info about:
+ * - Secure your notes with a password
+ * @author: Miguel Fagundez
+ * @date: March 08th, 2020
+ * @version: 1.0
+ * *******************************************/
 class InfoOneFragment : Fragment() {
 
     lateinit var callPager : callPagerOne

@@ -14,6 +14,14 @@ import com.devproject.fagundezdev.handynotepad.view.auth.LoginActivity
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
+/********************************************
+ * Fragment - RegisterFragment
+ * This fragment shows info about:
+ * - Basic username/password register
+ * @author: Miguel Fagundez
+ * @date: March 08th, 2020
+ * @version: 1.0
+ * *******************************************/
 class RegisterFragment : Fragment() {
 
     private lateinit var callBack : callPagerRegister
@@ -23,10 +31,6 @@ class RegisterFragment : Fragment() {
         super.onAttach(context)
         callBack = context as callPagerRegister
         setupViewModel()
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -40,8 +44,15 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupListeners()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+    }
+
+    private fun setupListeners() {
         ivRegisterArrowBack.setOnClickListener {
-            //parentFragment?.childFragmentManager?.popBackStack()
             callBack.callBackThree()
         }
 

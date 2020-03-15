@@ -2,5 +2,5 @@
 <paths>
     <external-path
         name="handynotepad_path"
-        path="Android/data/com.dev.handynotepad/files/Pictures" />
+        path="/" />
 </paths>

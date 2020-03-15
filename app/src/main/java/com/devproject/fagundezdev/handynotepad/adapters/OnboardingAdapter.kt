@@ -8,8 +8,18 @@ import com.devproject.fagundezdev.handynotepad.view.onboarding.InfoThreeFragment
 import com.devproject.fagundezdev.handynotepad.view.onboarding.InfoTwoFragment
 import com.devproject.fagundezdev.handynotepad.view.onboarding.RegisterFragment
 
+/********************************************
+ * Adapter - OnboardingAdapter
+ * OnBoarding at the beginning of the App
+ * @author: Miguel Fagundez
+ * @date: March 12th, 2020
+ * @version: 1.0
+ * *******************************************/
 class OnboardingAdapter(fragmentManager : FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
 
+    //***********************************************
+    // Showing three features and register fragment
+    //***********************************************
     override fun getItem(position: Int): Fragment {
         return when(position){
             0 -> InfoOneFragment()
@@ -19,6 +29,7 @@ class OnboardingAdapter(fragmentManager : FragmentManager) : FragmentStatePagerA
         }
     }
 
+    // Number of views
     override fun getCount(): Int {
         return 4
     }
