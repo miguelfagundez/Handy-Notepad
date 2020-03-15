@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,16 +16,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.devproject.fagundezdev.handynotepad.BuildConfig
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.utils.Constants
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.fragment_notes_details.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -74,6 +78,9 @@ class NoteDetailsFragment : Fragment() {
     private fun setupImageDialog() {
         // Image was pressed
         ivDetailsImage.setOnClickListener {
+            // Asking for permissions to access:
+            // 1. Camera
+            // 2. Gallery
             if (requestPermissions()) {
                 setupOptionDialog()
             }
@@ -91,7 +98,7 @@ class NoteDetailsFragment : Fragment() {
 
         // Gallery was pressed
         textViewGallery.setOnClickListener {
-            val intentGallery = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val intentGallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intentGallery, Constants.REQUEST_CODE_GALLERY)
             toast("Gallery selected")
             dialog.hide()
@@ -99,9 +106,22 @@ class NoteDetailsFragment : Fragment() {
 
         // Camera was pressed
         textViewCamera.setOnClickListener {
-            /*val intentCamera = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intentCamera, Constants.REQUEST_CODE_CAMERA)*/
+            val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            var imageFile: File? = null
+            val timeStamp = SimpleDateFormat(Constants.DATE_PICTURE_FORMAT).format(Date())
+            val fileName = "Picture_" + timeStamp + "_"
+            val directory = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            imageFile = File.createTempFile(fileName, ".jpg", directory)
+            if(imageFile != null){
+                //TODO Checking context!!
+                val imageUri = FileProvider.getUriForFile(context!!, BuildConfig.APPLICATION_ID + ".provider", imageFile)
+                Log.d("Test","${imageFile.absolutePath}")
+                image_url = imageFile.absolutePath
+                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+                startActivityForResult(intentCamera, Constants.REQUEST_CODE_CAMERA)
+            }
             toast("Camera selected")
+            dialog.hide()
         }
 
         dialog.show()
@@ -157,9 +177,13 @@ class NoteDetailsFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK){
             when(requestCode){
                 Constants.REQUEST_CODE_GALLERY -> {sendGalleryImageToImageView(data)}
-                Constants.REQUEST_CODE_CAMERA -> {}
+                Constants.REQUEST_CODE_CAMERA -> { sendCameraImageToImageView(data)}
             }
         }
+    }
+
+    private fun sendCameraImageToImageView(data: Intent?) {
+        Glide.with(this).load(image_url).into(ivDetailsImage)
     }
 
     private fun sendGalleryImageToImageView(data: Intent?) {
