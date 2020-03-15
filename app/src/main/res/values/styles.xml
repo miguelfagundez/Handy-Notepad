@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/open_sans_regular</item>
+    </style>
+
+    <!-- No Action Bar theme. -->
+    <style name="AppNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/open_sans_regular</item>
+    </style>
+
+    <style name="TextOnboardingColor">
+        <item name="android:textColor">#000000</item>
+    </style>
+    
+    <style name="AppOnBoardingButtons">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:fontFamily">@font/open_sans_regular</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">@dimen/dimen_20sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">@dimen/dimen_8dp</item>
+        <item name="android:layout_margin">@dimen/dimen_16dp</item>
+    </style>
+
+    <style name="AppOnBoardingText">
+        <item name="android:fontFamily">@font/open_sans_regular</item>
+        <item name="android:textColor">#F2747474</item>
+        <item name="android:textSize">@dimen/dimen_20sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">@dimen/dimen_8dp</item>
+        <item name="android:layout_margin">@dimen/dimen_16dp</item>
+    </style>
+
+</resources>

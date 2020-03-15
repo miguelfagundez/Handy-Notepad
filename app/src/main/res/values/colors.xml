@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#E13936</color>
+    <color name="colorOrange">#FA4636</color>
+    <color name="colorGreenLight">#03DAC5</color>
+    <color name="colorRedOnboarding">#FF1744</color>
+    <color name="colorOrangeOnboarding">#FF9100</color>
+    <color name="colorGreenOnboarding">#00E676</color>
+    <color name="colorOnboardingBackground">#F6F3F0</color>
+    <color name="textButtonOnboardingColor">#FFFFFF</color>
+</resources>

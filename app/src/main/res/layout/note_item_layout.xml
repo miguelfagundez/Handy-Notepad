@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_4dp"
+    android:elevation="@dimen/dimen_8dp"
+    app:cardCornerRadius="@dimen/dimen_8dp"
+    style="@style/AppTheme"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_8dp">
+
+    <TextView
+        android:id="@+id/tvNoteCreationDate"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textStyle="italic"
+        android:textAlignment="textEnd"
+        android:layout_marginTop="@dimen/dimen_4dp"
+        android:layout_marginEnd="@dimen/dimen_4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivItemNoteImage"
+        />
+
+    <TextView
+        android:id="@+id/tvItemTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginEnd="@dimen/dimen_16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toStartOf="@+id/cbItemMarkCompleted"
+        app:layout_constraintStart_toEndOf="@id/ivItemNoteImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvItemDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:layout_marginBottom="@dimen/dimen_8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvItemTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvItemTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvItemTitle" />
+
+    <CheckBox
+        android:id="@+id/cbItemMarkCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_4dp"
+        android:layout_margin="@dimen/dimen_8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvItemDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvItemTitle"/>
+
+    <ImageView
+        android:id="@+id/ivItemNoteImage"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toBottomOf="@id/tvItemDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvItemTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

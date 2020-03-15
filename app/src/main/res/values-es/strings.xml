@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bloc de Notas Practico</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in">Ingresar</string>
+    <string name="register">Registrar</string>
+    <string name="confirm_username">Confirmar Usuario</string>
+    <string name="confirm_password">Confirmar Contraseña</string>
+    <string name="note_title">Titulo</string>
+    <string name="note_description">Descripcion</string>
+    <string name="note_body">Cuerpo de la Nota</string>
+    <string name="add_note">Agregando nueva nota</string>
+    <string name="back">Regresar</string>
+    <string name="next">Siguiente</string>
+    <string name="data_empty">Los datos no pueden ser vacios</string>
+    <string name="data_no_match">Los datos no coinciden</string>
+    <string name="data_correct">Registrando el usuario</string>
+    <string name="data_login_correct">Datos aceptados</string>
+    <string name="stay_signed_in">Recordarme</string>
+    <string name="update_note_title">Actualizar una nota</string>
+    <string name="Add_new_note_title">Agregar una nueva nota</string>
+    <string name="current_time">Fecha Actual:</string>
+    <string name="creation_time">Fecha de Creacion:</string>
+    <string name="creation_date">Fecha de Creacion:</string>
+    <string name="last_edit">Editado:</string>
+    <string name="none_notes_selected">Ninguna nota ha sido seleccionada</string>
+    <string name="delete_some_notes">Algunas notas han sido borradas</string>
+    <string name="open_camera">Abrir la Camara</string>
+    <string name="choose_from_gallery">Abrir de la Galeria</string>
+    <string name="new_note">Nueva nota</string>
+    <string name="permissions_for_images">Los permisos son necesarios para manejar imagenes.</string>
+    <string name="one_time_register">Solo registrate una vez. Proteje tus notas con un usuario y contraseña.</string>
+    <string name="notes_pictures">Guarda tus notas con una imagen. Desde la Galeria o la Camara.</string>
+    <string name="notes_external_card">Enviar tus notas a una memoria externa.</string>
+    <string name="dialog_delete">Borrar</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_message">Esta seguro que quiere borrar estas notas?</string>
+    <string name="dialog_title">Advertencia!</string>
+</resources>
