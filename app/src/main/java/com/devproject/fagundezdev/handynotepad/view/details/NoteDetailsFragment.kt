@@ -207,6 +207,7 @@ class NoteDetailsFragment : Fragment() {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
 
+        var closeFragment = false
         isUpdating = arguments?.getBoolean(Constants.IS_ADD_NOTE)?:false
         firstTime = true
 
@@ -265,11 +266,14 @@ class NoteDetailsFragment : Fragment() {
             fabDetailsDone.setOnClickListener {
 
                 setEditableComponents(true)
+                fabDetailsDone.setImageResource(R.drawable.ic_done)
+
                 if(etDetailsTitle.text.isNotBlank()){
-
                     saveData()
-
-                    //activity?.onBackPressed()
+                    if(closeFragment == true){
+                        activity?.onBackPressed()
+                    }
+                    closeFragment = true
                 }else{
                     toast(getString(R.string.title_msg_empty))
                 }
@@ -290,10 +294,8 @@ class NoteDetailsFragment : Fragment() {
 
             fabDetailsDone.setOnClickListener {
                 if(etDetailsTitle.text.isNotBlank()){
-
                     saveData()
-
-                    //activity?.onBackPressed()
+                    activity?.onBackPressed()
                 }else{
                     toast(getString(R.string.title_msg_empty))
                 }
