@@ -2,25 +2,19 @@ package com.devproject.fagundezdev.handynotepad.view.details
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.devproject.fagundezdev.handynotepad.BuildConfig
@@ -51,7 +45,7 @@ class NoteDetailsFragment : Fragment() {
     //*****************************
     // Notes variables, Temp data
     //*****************************
-    var noteID : Int? = null
+    var noteID : Long? = null
     var title = ""
     var description = ""
     var body = ""
@@ -60,6 +54,8 @@ class NoteDetailsFragment : Fragment() {
     var isSelected : Boolean = false
     var creation_date = ""
     var edit_date = ""
+    var firstTime = true
+    var isUpdating = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,7 +95,7 @@ class NoteDetailsFragment : Fragment() {
 
         // Gallery was pressed
         textViewGallery.setOnClickListener {
-            val intentGallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val intentGallery = Intent(Intent.ACTION_OPEN_DOCUMENT/*Intent.ACTION_PICK*/, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intentGallery, Constants.REQUEST_CODE_GALLERY)
             toast("Gallery selected")
             dialog.hide()
@@ -211,16 +207,31 @@ class NoteDetailsFragment : Fragment() {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
 
+        isUpdating = arguments?.getBoolean(Constants.IS_ADD_NOTE)?:false
+        firstTime = true
+
         cleanComponents()
+
+        fabDetailsSave.setOnClickListener {
+            if(etDetailsTitle.text.isNotBlank()) {
+                toast(getString(R.string.info_saved))
+                saveData()
+            }else{
+                toast(getString(R.string.title_msg_empty))
+            }
+        }
 
         //***********************
         // Update or Add options
         //***********************
-        val isUpdating = arguments?.getBoolean(Constants.IS_ADD_NOTE)
+
         if (isUpdating == true){
             //****************************
             // Update our note
             //****************************
+            setEditableComponents(false)
+
+            Timber.i("No deberia estar aqui")
             arguments?.getInt(Constants.ID).let { noteID ->
                 if (noteID != -1){
 
@@ -234,46 +245,33 @@ class NoteDetailsFragment : Fragment() {
                     tvDetailsCreationDateNote.setText(arguments?.getString(Constants.CREATION_DATE))
                     tvDetailsLastEditNote.setText(arguments?.getString(Constants.LAST_EDIT_DATE))
                     creation_date = tvDetailsCreationDateNote.text.toString()
+
                     val image = arguments?.getString(Constants.IMAGE_URL)
                     image_url = image?:""
+
                     if (image.isNullOrEmpty()||image.isNullOrBlank()){
-                        toast("True")
                         Glide.with(ivDetailsImage).load(R.drawable.ic_launcher_foreground).into(ivDetailsImage)
                     }else{
-                        toast("False")
-
                         Timber.i("Details Fragment: $image")
 
-                        //Glide.with(ivDetailsImage).load(image).into(ivDetailsImage)
-                        val imageUri : Uri? = image.toUri()
-                        ivDetailsImage.setImageURI(imageUri)
+                        Glide.with(ivDetailsImage).load(image).into(ivDetailsImage)
+                        /*val imageUri : Uri? = image.toUri()
+                        ivDetailsImage.setImageURI(imageUri)*/
                     }
-
-
-                    //ivDetailsImage.setImageURI(Uri.parse(arguments?.getString(Constants.IMAGE_URL)))
                 }
             }
 
             fabDetailsDone.setImageResource(R.drawable.ic_edit)
             fabDetailsDone.setOnClickListener {
+
+                setEditableComponents(true)
                 if(etDetailsTitle.text.isNotBlank()){
 
-                    val simpleCurrentDate = SimpleDateFormat(Constants.DATE_FORMAT)
-                    val simpleStringDate = simpleCurrentDate.format(Date())
+                    saveData()
 
-                    noteID = arguments?.getInt(Constants.ID)
-                    title = etDetailsTitle.text.toString()
-                    description = etDetailsDescription.text.toString()
-                    body = etDetailsBody.text.toString()
-                    priority = 1
-                    isSelected = arguments?.getBoolean(Constants.IS_SELECTED)?:false
-                    edit_date = simpleStringDate
-
-                    viewModel.update(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
-
-                    activity?.onBackPressed()
+                    //activity?.onBackPressed()
                 }else{
-                    toast("Title cannot be empty")
+                    toast(getString(R.string.title_msg_empty))
                 }
             }
         }else{
@@ -284,30 +282,74 @@ class NoteDetailsFragment : Fragment() {
             val simpleCurrentDate = SimpleDateFormat(Constants.DATE_FORMAT)
             val simpleStringDate = simpleCurrentDate.format(Date())
 
-            tvDetailsCreationDateNote.setText(simpleStringDate)
+            creation_date = simpleStringDate
+            tvDetailsCreationDateNote.setText(creation_date)
 
+            setEditableComponents(true)
             fabDetailsDone.setImageResource(R.drawable.ic_done)
+
             fabDetailsDone.setOnClickListener {
                 if(etDetailsTitle.text.isNotBlank()){
-                    noteID = null
-                    title = etDetailsTitle.text.toString()
-                    description = etDetailsDescription.text.toString()
-                    body = etDetailsBody.text.toString()
-                    priority = 1
-                    //image_url = ""
-                    isSelected = false
-                    creation_date = simpleStringDate
-                    edit_date = ""
 
-                    viewModel.insert(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
+                    saveData()
 
-                    activity?.onBackPressed()
+                    //activity?.onBackPressed()
                 }else{
-                    toast("Title cannot be empty")
+                    toast(getString(R.string.title_msg_empty))
                 }
             }
         }
+    }
 
+    fun saveData() {
+
+        // Last edit date
+        val simpleCurrentDate = SimpleDateFormat(Constants.DATE_FORMAT)
+        val simpleStringDate = simpleCurrentDate.format(Date())
+
+        // Knowing if data is updating or new
+        if (isUpdating == true){
+            // Updating
+            Timber.i("Updating a note")
+            Timber.i("Values: $isUpdating and $firstTime")
+            when(firstTime){
+                true -> noteID = arguments?.getLong(Constants.ID)
+                else -> Timber.i("isUpdating == true and noteID = $noteID")
+            }
+            title = etDetailsTitle.text.toString()
+            description = etDetailsDescription.text.toString()
+            body = etDetailsBody.text.toString()
+            priority = 1
+            isSelected = arguments?.getBoolean(Constants.IS_SELECTED)?:false
+            edit_date = simpleStringDate
+            // Saving the data into Room
+            viewModel.update(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
+
+        }else{
+            // New note
+            Timber.i("Nueva nota")
+            Timber.i("Values: $isUpdating and $firstTime")
+            noteID = null
+            title = etDetailsTitle.text.toString()
+            description = etDetailsDescription.text.toString()
+            body = etDetailsBody.text.toString()
+            priority = 1
+            isSelected = false
+            edit_date = simpleStringDate
+            firstTime = false
+            isUpdating = true
+            // Saving the data into Room
+            noteID = viewModel.insert(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
+        }
+
+    }
+
+    // Update: value -> false
+    // New Note: value -> true
+    fun setEditableComponents(value: Boolean){
+        etDetailsBody.isEnabled = value
+        etDetailsDescription.isEnabled = value
+        etDetailsTitle.isEnabled = value
     }
 
     fun cleanComponents(){

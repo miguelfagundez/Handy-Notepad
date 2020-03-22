@@ -37,4 +37,6 @@
     <string name="dialog_cancel">Cancelar</string>
     <string name="dialog_message">Esta seguro que quiere borrar estas notas?</string>
     <string name="dialog_title">Advertencia!</string>
+    <string name="info_saved">Info guardada</string>
+    <string name="title_msg_empty">El titulo no puede ser vacio</string>
 </resources>

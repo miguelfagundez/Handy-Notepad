@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
 data class Notes(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id : Int? = null,
+    var id : Long? = null,
     @ColumnInfo(name = "title")
     var title : String = "title",
     @ColumnInfo(name = "description")

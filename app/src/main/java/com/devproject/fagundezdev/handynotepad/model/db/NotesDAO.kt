@@ -21,7 +21,8 @@ interface NotesDAO {
     fun getAllNotes():LiveData<List<Notes>>
 
     @Insert(onConflict = REPLACE)
-    suspend fun insertNote(note:Notes?)
+    //suspend fun insertNote(note:Notes?)
+    fun insertNote(note:Notes?) : Long
 
     @Update
     suspend fun updateNote(note:Notes?)
@@ -43,5 +44,5 @@ interface NotesDAO {
     suspend fun deleteAllNotes()
 
     @Query("SELECT * FROM notes_table WHERE id = :idValue")
-    suspend fun getNote(idValue : Int?) : Notes
+    suspend fun getNote(idValue : Long?) : Notes
 }

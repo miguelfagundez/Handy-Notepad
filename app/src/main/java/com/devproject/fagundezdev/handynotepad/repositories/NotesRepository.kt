@@ -28,7 +28,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
     //**********************************
     // Creat note option for utils uses
     //**********************************
-    fun createNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
+    fun createNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
                    priority: Int, selected: Boolean, creationDate: String, editDate: String) : Notes {
 
         var note = Notes()
@@ -49,18 +49,23 @@ class NotesRepository(private val notesDao:NotesDAO?) {
     //*********************************************
     // Room Database
     //*********************************************
-    suspend fun insertNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
+    /*suspend fun insertNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
                            priority: Int, selected: Boolean, creationDate: String, editDate: String){
         notesDao?.insertNote(createNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate))
         numberNotes += 1
+    }*/
+    fun insertNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
+                   priority: Int, selected: Boolean, creationDate: String, editDate: String) : Long{
+        numberNotes += 1
+        return notesDao?.insertNote(createNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate))?:0
     }
 
-    suspend fun updateNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
+    suspend fun updateNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
                            priority: Int, selected: Boolean, creationDate: String, editDate: String){
         notesDao?.insertNote(createNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate))
     }
 
-    suspend fun updateSelected(id:Int?, selected: Boolean){
+    suspend fun updateSelected(id:Long?, selected: Boolean){
         var note = notesDao?.getNote(id)
         note?.isSelected = selected
         notesDao?.updateNote(note)

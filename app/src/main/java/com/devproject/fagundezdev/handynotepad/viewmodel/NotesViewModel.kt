@@ -38,17 +38,22 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     // Database access methods
     //***************************************************************
 
-    fun insert(id: Int?, title: String, description: String, body: String, imageUrl: String,
-               priority: Int, selected: Boolean, creationDate: String, editDate: String)  = viewModelScope.launch {
-        repository.insertNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate)
+    /*fun insert(id: Int?, title: String, description: String, body: String, imageUrl: String,
+               priority: Int, selected: Boolean, creationDate: String, editDate: String) = viewModelScope.launch {
+         repository.insertNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate)
+    }*/
+
+    fun insert(id: Long?, title: String, description: String, body: String, imageUrl: String,
+               priority: Int, selected: Boolean, creationDate: String, editDate: String) : Long {
+        return repository.insertNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate)
     }
 
-    fun update(id: Int?, title: String, description: String, body: String, imageUrl: String,
+    fun update(id: Long?, title: String, description: String, body: String, imageUrl: String,
                priority: Int, selected: Boolean, creationDate: String, editDate: String) = viewModelScope.launch {
         repository.updateNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate)
     }
 
-    fun updateSelected(id: Int?, selected: Boolean) = viewModelScope.launch {
+    fun updateSelected(id: Long?, selected: Boolean) = viewModelScope.launch {
         repository.updateSelected(id, selected)
     }
 

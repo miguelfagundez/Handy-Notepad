@@ -36,4 +36,6 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_message">Are you sure you want to delete these notes?</string>
     <string name="dialog_title">Warning!</string>
+    <string name="info_saved">Info saved</string>
+    <string name="title_msg_empty">Title cannot be empty</string>
 </resources>

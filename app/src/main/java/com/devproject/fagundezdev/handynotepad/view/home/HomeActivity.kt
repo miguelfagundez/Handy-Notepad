@@ -124,13 +124,13 @@ class HomeActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
 
         itemClickListener = object : NoteClickListener{
-            override fun onDetailsNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
+            override fun onDetailsNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
                                        priority: Int, selected: Boolean, creationDate: String, editDate: String) {
                 isUpdatingNote = true
 
                 val bundle = Bundle()
 
-                bundle.putInt(Constants.ID, id?:-1)
+                bundle.putLong(Constants.ID, id?:-1)
                 bundle.putString(Constants.TITLE, title)
                 bundle.putString(Constants.DESCRIPTION, description)
                 bundle.putString(Constants.BODY, body)
@@ -158,7 +158,7 @@ class HomeActivity : AppCompatActivity() {
                     .commit()
             }
 
-            override fun onCheckBoxPressed(id:Int?, selected:Boolean) {
+            override fun onCheckBoxPressed(id:Long?, selected:Boolean) {
                 if (selected == true){
                     checkBoxPressed += 1
                 }else{

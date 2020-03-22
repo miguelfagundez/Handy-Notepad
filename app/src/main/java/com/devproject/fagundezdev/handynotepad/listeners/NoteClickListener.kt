@@ -10,7 +10,7 @@ package com.devproject.fagundezdev.handynotepad.listeners
  * *******************************************/
 interface NoteClickListener {
 
-    fun onDetailsNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
+    fun onDetailsNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
                       priority: Int, selected: Boolean, creationDate: String, editDate: String)
-    fun onCheckBoxPressed(id:Int?, selected:Boolean)
+    fun onCheckBoxPressed(id:Long?, selected:Boolean)
 }
