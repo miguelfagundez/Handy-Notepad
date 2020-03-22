@@ -28,6 +28,14 @@ android {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
 
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -75,4 +83,7 @@ dependencies {
 
     // ViewPager (Fragments)
     implementation "androidx.viewpager:viewpager:$rootProject.viewPagerVersion"
+
+    // Timber (logging)
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

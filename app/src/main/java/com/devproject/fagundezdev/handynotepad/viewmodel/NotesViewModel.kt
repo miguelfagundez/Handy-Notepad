@@ -12,6 +12,7 @@ import com.devproject.fagundezdev.handynotepad.model.sharedpreferences.NoteShare
 import com.devproject.fagundezdev.handynotepad.repositories.NotesRepository
 import com.devproject.fagundezdev.handynotepad.utils.ResponseObj
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /********************************************
  * ViewModel - NotesViewModel
@@ -22,7 +23,6 @@ import kotlinx.coroutines.launch
  * *******************************************/
 class NotesViewModel(application: Application):AndroidViewModel(application) {
 
-    val TAG = "NotesViewModel"
     private val repository : NotesRepository
     val listNotes : LiveData<List<Notes>>?
     val context = application.applicationContext
@@ -60,7 +60,7 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     }
 
     fun checkBoxUnsuscribed()  = viewModelScope.launch {
-        Log.d(TAG, "ViewModel Unsuscribed")
+        Timber.i("ViewModel Unsuscribed")
         repository.checkBoxUnsuscribed()
     }
 

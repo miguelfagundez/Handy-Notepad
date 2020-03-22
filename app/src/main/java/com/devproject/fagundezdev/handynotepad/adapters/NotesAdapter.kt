@@ -15,6 +15,7 @@ import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.listeners.NoteClickListener
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import kotlinx.android.synthetic.main.note_item_layout.view.*
+import timber.log.Timber
 
 /********************************************
  * Adapter - NotesAdapter
@@ -25,7 +26,6 @@ import kotlinx.android.synthetic.main.note_item_layout.view.*
  * *******************************************/
 class NotesAdapter(private val context: Context, private val itemClickListener: NoteClickListener) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
-    val TAG = "NotesAdapter"
     private var inflater = LayoutInflater.from(context)
     private var notes = emptyList<Notes>()
 
@@ -47,10 +47,12 @@ class NotesAdapter(private val context: Context, private val itemClickListener: 
             if(currentNote.image_url.isNullOrEmpty() || currentNote.image_url.isNullOrBlank()){
                 // Default image (logo app)
                 Glide.with(image).load(R.drawable.ic_launcher_foreground).into(image)
-                Log.d("Test","Image Defaul")
+
+                Timber.i("Default Image")
             }else{
-                Log.d("Test","Image Gallery")
-                Log.d("Test","Adapter: ${currentNote.image_url}")
+
+                Timber.i("Gallery Image")
+                Timber.i("Adapter: ${currentNote.image_url}")
                 // Custom image (Camera || Gallery)
                 Glide.with(image).load(currentNote.image_url).into(image)
             }

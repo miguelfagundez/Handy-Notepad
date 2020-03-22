@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -28,6 +29,7 @@ import com.devproject.fagundezdev.handynotepad.utils.Constants
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.fragment_notes_details.*
+import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,7 +46,6 @@ import kotlin.collections.ArrayList
  * *******************************************/
 class NoteDetailsFragment : Fragment() {
 
-    val TAG = "NoteDetailsFragment"
     private lateinit var viewModel : NotesViewModel
 
     //*****************************
@@ -113,12 +114,19 @@ class NoteDetailsFragment : Fragment() {
             val directory = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
             imageFile = File.createTempFile(fileName, ".jpg", directory)
             if(imageFile != null){
-                //TODO Checking context!!
-                val imageUri = FileProvider.getUriForFile(context!!, BuildConfig.APPLICATION_ID + ".provider", imageFile)
-                Log.d("Test","${imageFile.absolutePath}")
-                image_url = imageFile.absolutePath
-                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                startActivityForResult(intentCamera, Constants.REQUEST_CODE_CAMERA)
+
+                context?.let {myContext ->
+                    // Smart cast to Context is impossible, because Context is a property
+                    // that has open or custom getter
+                    val imageUri = FileProvider.getUriForFile(myContext, BuildConfig.APPLICATION_ID + ".provider", imageFile)
+
+                    Timber.i("${imageFile.absolutePath}")
+
+                    image_url = imageFile.absolutePath
+                    intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+                    startActivityForResult(intentCamera, Constants.REQUEST_CODE_CAMERA)
+                }
+
             }
             toast("Camera selected")
             dialog.hide()
@@ -128,31 +136,34 @@ class NoteDetailsFragment : Fragment() {
     }
 
     private fun requestPermissions(): Boolean {
-        //TODO Checking activity!!.applicationContext (Double bang)
-        val cameraPermission = ContextCompat.checkSelfPermission(activity!!.applicationContext, android.Manifest.permission.CAMERA)
-        val readExternalStoragePermission = ContextCompat.checkSelfPermission(activity!!.applicationContext, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-        val writeExternalStoragePermission = ContextCompat.checkSelfPermission(activity!!.applicationContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        var permissionDecision = false
+        activity?.let {fragmentActivity ->
+            val cameraPermission = ContextCompat.checkSelfPermission(fragmentActivity, android.Manifest.permission.CAMERA)
+            val readExternalStoragePermission = ContextCompat.checkSelfPermission(fragmentActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            val writeExternalStoragePermission = ContextCompat.checkSelfPermission(fragmentActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-        val listPermissions = ArrayList<String>()
+            val listPermissions = ArrayList<String>()
 
-        if (cameraPermission != PackageManager.PERMISSION_GRANTED){
-            listPermissions.add(android.Manifest.permission.CAMERA)
+            if (cameraPermission != PackageManager.PERMISSION_GRANTED){
+                listPermissions.add(android.Manifest.permission.CAMERA)
+            }
+
+            if (readExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
+                listPermissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+
+            if (writeExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
+                listPermissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+
+            if (!listPermissions.isEmpty()){
+                requestPermissions(listPermissions.toTypedArray<String>(), Constants.PERMISSION_CODE)
+                return false
+            }
+            permissionDecision = true
         }
 
-        if (readExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
-            listPermissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-
-        if (writeExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
-            listPermissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
-
-        if (!listPermissions.isEmpty()){
-            requestPermissions(listPermissions.toTypedArray<String>(), Constants.PERMISSION_CODE)
-            return false
-        }
-
-        return true
+        return permissionDecision
     }
 
     override fun onRequestPermissionsResult(
@@ -230,9 +241,12 @@ class NoteDetailsFragment : Fragment() {
                         Glide.with(ivDetailsImage).load(R.drawable.ic_launcher_foreground).into(ivDetailsImage)
                     }else{
                         toast("False")
-                        Log.d("Test","False")
-                        Log.d("Test","Details Fragment: $image")
-                        Glide.with(ivDetailsImage).load(image).into(ivDetailsImage)
+
+                        Timber.i("Details Fragment: $image")
+
+                        //Glide.with(ivDetailsImage).load(image).into(ivDetailsImage)
+                        val imageUri : Uri? = image.toUri()
+                        ivDetailsImage.setImageURI(imageUri)
                     }
 
 

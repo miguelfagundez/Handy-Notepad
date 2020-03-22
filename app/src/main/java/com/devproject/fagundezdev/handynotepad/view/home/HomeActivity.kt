@@ -16,6 +16,7 @@ import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.view.details.NoteDetailsFragment
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.activity_home.*
+import timber.log.Timber
 
 
 /********************************************
@@ -26,8 +27,6 @@ import kotlinx.android.synthetic.main.activity_home.*
  * @version: 1.0
  * *******************************************/
 class HomeActivity : AppCompatActivity() {
-
-    val TAG = "HomeActivity"
 
     private lateinit var viewModel : NotesViewModel
 
@@ -138,7 +137,9 @@ class HomeActivity : AppCompatActivity() {
                 bundle.putBoolean(Constants.IS_SELECTED, selected)
                 bundle.putInt(Constants.PRIORITY, priority)
                 bundle.putString(Constants.IMAGE_URL, imageUrl)
-                Log.d("Test","Home ACtivity: $imageUrl")
+
+                Timber.i("Home Activity: $imageUrl")
+
                 bundle.putBoolean(Constants.IS_ADD_NOTE, isUpdatingNote)
                 bundle.putString(Constants.CREATION_DATE, creationDate)
                 bundle.putString(Constants.LAST_EDIT_DATE, editDate)

@@ -6,6 +6,7 @@ import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import com.devproject.fagundezdev.handynotepad.model.db.NotesDAO
 import com.devproject.fagundezdev.handynotepad.model.sharedpreferences.NoteSharedPreferences
 import com.devproject.fagundezdev.handynotepad.utils.Constants
+import timber.log.Timber
 
 /********************************************
  * Repository - NotesRepository
@@ -17,7 +18,6 @@ import com.devproject.fagundezdev.handynotepad.utils.Constants
  * *******************************************/
 class NotesRepository(private val notesDao:NotesDAO?) {
 
-    val TAG = "NotesRepository"
     var listNotes : LiveData<List<Notes>>? = null
     var numberNotes = listNotes?.value?.size?:0
 
@@ -75,13 +75,16 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         val notes = listNotes?.value
         var size = notes?.size?:0
         size -= 1
-        Log.d(TAG, "SIZE: $size")
+
+        Timber.i("SIZE: $size")
+
         if (size >= 0){
             for(i in 0..size){
                 if(notes?.get(i)?.isSelected == true) {
                     notesDao?.deleteNote(notes.get(i))
                     numberNotes -= 1
-                    Log.d(TAG, "Note deleted(position): $i")
+
+                    Timber.i("Note deleted(position): $i")
                 }
             }
         }
@@ -91,12 +94,15 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         val notes = listNotes?.value
         var size = notes?.size?:0
         size -= 1
-        Log.d(TAG, "SIZE: $size")
+
+        Timber.i("SIZE: $size")
+
         for(i in 0..size){
             if(notes?.get(i)?.isSelected == true) {
                 notes?.get(i)?.isSelected = false
                 notesDao?.updateNote(notes.get(i))
-                Log.d(TAG, "i: $i")
+
+                Timber.i("i: $i")
             }
         }
     }

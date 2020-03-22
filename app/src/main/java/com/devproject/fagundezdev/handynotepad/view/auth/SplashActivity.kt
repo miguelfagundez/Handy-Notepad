@@ -19,8 +19,6 @@ import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 * ************************************************/
 class SplashActivity : AppCompatActivity() {
 
-    val TAG = "SplashActivity"
-
     private lateinit var viewModel : NotesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
