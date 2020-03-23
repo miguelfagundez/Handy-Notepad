@@ -120,6 +120,10 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
         return repository.isLogged()
     }
 
+    fun logoutUser(){
+        repository.loginUser(false)
+    }
+
     fun isSignInChecked(checked: Boolean) {
         repository.loginUser(checked)
     }

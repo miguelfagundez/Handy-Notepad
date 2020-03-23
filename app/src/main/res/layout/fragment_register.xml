@@ -78,6 +78,7 @@
             android:id="@+id/etRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:drawableStart="@drawable/ic_password"
             android:drawablePadding="@dimen/dimen_12dp"
             android:hint="@string/password"/>
@@ -98,6 +99,7 @@
             android:id="@+id/etRegisterConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:drawableStart="@drawable/ic_password"
             android:drawablePadding="@dimen/dimen_12dp"
             android:hint="@string/confirm_password"/>

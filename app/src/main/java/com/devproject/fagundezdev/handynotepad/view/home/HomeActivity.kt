@@ -56,7 +56,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        //setSupportActionBar(findViewById(R.id.my_home_toolbar))
 
         checkBoxPressed = 0
 
@@ -65,11 +64,15 @@ class HomeActivity : AppCompatActivity() {
         setupFloatingActionButtons()
     }
 
+    //*************************************************
+    // Menu inflater - Action Bar
+    //*************************************************
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    // Action if button is pressed: calling settings
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_action_settings -> {

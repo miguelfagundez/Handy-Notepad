@@ -39,7 +39,7 @@
     <string name="dialog_title">Advertencia!</string>
     <string name="info_saved">Info guardada</string>
     <string name="title_msg_empty">El titulo no puede ser vacio</string>
-    <string name="menu_settings">Settings</string>
-    <string name="logout">Logout</string>
+    <string name="menu_settings">Herramientas</string>
+    <string name="logout">Cerrar Sesion</string>
     <string name="handy_notepad_v1_0">Handy Notepad v1.0</string>
 </resources>
