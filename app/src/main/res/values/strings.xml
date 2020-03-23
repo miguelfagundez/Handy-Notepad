@@ -41,4 +41,9 @@
     <string name="menu_settings">Settings</string>
     <string name="logout">Logout</string>
     <string name="handy_notepad_v1_0">Handy Notepad v1.0</string>
+    <string name="export_notes">Export notes</string>
+    <string name="files_exported_msg">Files has been exported to sd card</string>
+    <string name="sd_card_detected_msg">SD Card not detected</string>
+    <string name="update_android_msg">Need to update you Android version to 6.0 or higher</string>
+    <string name="sd_card_msg">No SD Card is available for read and write data</string>
 </resources>

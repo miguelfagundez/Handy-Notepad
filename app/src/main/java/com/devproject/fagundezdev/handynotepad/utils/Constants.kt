@@ -53,5 +53,6 @@ object Constants {
     const val DATE_PICTURE_FORMAT = "yyyyMMddHHmmss"
     const val REQUEST_CODE_CAMERA = 2
     const val REQUEST_CODE_GALLERY = 4
-    const val PERMISSION_CODE = 135
+    const val PERMISSION_IMAGE_CODE = 135
+    const val PERMISSION_FILE_CODE = 248
 }

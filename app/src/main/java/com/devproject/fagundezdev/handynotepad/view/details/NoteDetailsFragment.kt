@@ -81,7 +81,7 @@ class NoteDetailsFragment : Fragment() {
             // Asking for permissions to access:
             // 1. Camera
             // 2. Gallery
-            if (requestPermissions()) {
+            if (requestMyPermissions()) {
                 setupOptionDialog()
             }
         }
@@ -134,7 +134,7 @@ class NoteDetailsFragment : Fragment() {
         dialog.show()
     }
 
-    private fun requestPermissions(): Boolean {
+    private fun requestMyPermissions(): Boolean {
         var permissionDecision = false
         activity?.let {fragmentActivity ->
             val cameraPermission = ContextCompat.checkSelfPermission(fragmentActivity, android.Manifest.permission.CAMERA)
@@ -156,7 +156,7 @@ class NoteDetailsFragment : Fragment() {
             }
 
             if (!listPermissions.isEmpty()){
-                requestPermissions(listPermissions.toTypedArray<String>(), Constants.PERMISSION_CODE)
+                requestPermissions(listPermissions.toTypedArray<String>(), Constants.PERMISSION_IMAGE_CODE)
                 return false
             }
             permissionDecision = true
@@ -172,7 +172,7 @@ class NoteDetailsFragment : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
-            Constants.PERMISSION_CODE -> {
+            Constants.PERMISSION_IMAGE_CODE -> {
                 if(grantResults.isNotEmpty() and (grantResults[0] == PackageManager.PERMISSION_GRANTED)){
                     setupOptionDialog()
                 }else{
@@ -201,7 +201,6 @@ class NoteDetailsFragment : Fragment() {
         ivDetailsImage.setImageURI(selectedGalleryImage)
         image_url = selectedGalleryImage.toString()
     }
-
 
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)

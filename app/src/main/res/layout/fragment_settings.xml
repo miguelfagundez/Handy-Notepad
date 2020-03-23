@@ -32,6 +32,19 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
+        android:id="@+id/btnSettingExport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:text="@string/export_notes"
+        android:layout_margin="@dimen/dimen_12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSettingLogout"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
         android:id="@+id/btnSettingLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
