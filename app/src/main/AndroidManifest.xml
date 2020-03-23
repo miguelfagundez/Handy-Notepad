@@ -18,10 +18,10 @@
         <activity android:name=".view.settings.SettingsFragment"></activity>
         <activity android:name=".view.home.HomeActivity" />
         <activity android:name=".view.auth.LoginActivity" />
-        <activity android:name=".view.onboarding.OnboardingActivity" />
+        <activity android:name=".view.onboarding.OnboardingActivity">
+        </activity>
         <activity
-            android:name=".view.auth.SplashActivity"
-            android:theme="@style/AppNoActionBar">
+            android:name=".view.auth.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

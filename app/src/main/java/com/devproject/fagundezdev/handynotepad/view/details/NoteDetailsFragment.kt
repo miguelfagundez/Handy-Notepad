@@ -52,9 +52,12 @@ class NoteDetailsFragment : Fragment() {
     var image_url = ""
     var priority = 0
     var isSelected : Boolean = false
+    // Dates
     var creation_date = ""
     var edit_date = ""
+    // Inserting note only one time, second time is updating
     var firstTime = true
+    // Add new note or updating existing note
     var isUpdating = false
 
     override fun onCreateView(
@@ -273,6 +276,7 @@ class NoteDetailsFragment : Fragment() {
                     if(closeFragment == true){
                         activity?.onBackPressed()
                     }
+                    toast(getString(R.string.info_saved))
                     closeFragment = true
                 }else{
                     toast(getString(R.string.title_msg_empty))
@@ -296,6 +300,7 @@ class NoteDetailsFragment : Fragment() {
                 if(etDetailsTitle.text.isNotBlank()){
                     saveData()
                     activity?.onBackPressed()
+                    toast(getString(R.string.info_saved))
                 }else{
                     toast(getString(R.string.title_msg_empty))
                 }

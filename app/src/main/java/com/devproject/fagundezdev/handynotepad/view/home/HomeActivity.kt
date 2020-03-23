@@ -4,6 +4,9 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +17,7 @@ import com.devproject.fagundezdev.handynotepad.listeners.NoteClickListener
 import com.devproject.fagundezdev.handynotepad.utils.Constants
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.view.details.NoteDetailsFragment
+import com.devproject.fagundezdev.handynotepad.view.settings.SettingsFragment
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import timber.log.Timber
@@ -32,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var itemClickListener: NoteClickListener
     private val noteDetailsFragment = NoteDetailsFragment()
+    private val settingsFragment = SettingsFragment()
     private lateinit var adapter : NotesAdapter
 
     // Note Details Fragment (Update Note or Add Note)
@@ -51,12 +56,36 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        //setSupportActionBar(findViewById(R.id.my_home_toolbar))
 
         checkBoxPressed = 0
 
         setupRecyclerView()
         setupViewModel()
         setupFloatingActionButtons()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_action_settings -> {
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.slide_out,
+                        R.anim.slide_in,
+                        R.anim.slide_out
+                    )
+                    .replace(R.id.detailFragmentContainer, settingsFragment)
+                    .addToBackStack(settingsFragment.tag)
+                    .commit()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupFloatingActionButtons() {

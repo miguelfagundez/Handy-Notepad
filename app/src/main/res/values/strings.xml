@@ -38,4 +38,7 @@
     <string name="dialog_title">Warning!</string>
     <string name="info_saved">Info saved</string>
     <string name="title_msg_empty">Title cannot be empty</string>
+    <string name="menu_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="handy_notepad_v1_0">Handy Notepad v1.0</string>
 </resources>
