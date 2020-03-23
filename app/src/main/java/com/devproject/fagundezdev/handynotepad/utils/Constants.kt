@@ -55,4 +55,5 @@ object Constants {
     const val REQUEST_CODE_GALLERY = 4
     const val PERMISSION_IMAGE_CODE = 135
     const val PERMISSION_FILE_CODE = 248
+    const val REQUEST_USES_PERMISSIONS = 6248
 }

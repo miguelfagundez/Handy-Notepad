@@ -15,7 +15,7 @@
     <string name="next">Siguiente</string>
     <string name="data_empty">Los datos no pueden ser vacios</string>
     <string name="data_no_match">Los datos no coinciden</string>
-    <string name="data_correct">Registrando el usuario</string>
+    <string name="data_correct">Registrando el usuario satisfactoriamente</string>
     <string name="data_login_correct">Datos aceptados</string>
     <string name="stay_signed_in">Recordarme</string>
     <string name="update_note_title">Actualizar una nota</string>
@@ -27,9 +27,9 @@
     <string name="none_notes_selected">Ninguna nota ha sido seleccionada</string>
     <string name="delete_some_notes">Algunas notas han sido borradas</string>
     <string name="open_camera">Abrir la Camara</string>
-    <string name="choose_from_gallery">Abrir de la Galeria</string>
+    <string name="choose_from_gallery">Abrir la Galeria</string>
     <string name="new_note">Nueva nota</string>
-    <string name="permissions_for_images">Los permisos son necesarios para manejar imagenes.</string>
+    <string name="permissions_for_images">Los permisos son necesarios para manejar imagenes y archivos.</string>
     <string name="one_time_register">Solo registrate una vez. Proteje tus notas con un usuario y contraseña.</string>
     <string name="notes_pictures">Guarda tus notas con una imagen. Desde la Galeria o la Camara.</string>
     <string name="notes_external_card">Enviar tus notas a una memoria externa.</string>
@@ -37,14 +37,15 @@
     <string name="dialog_cancel">Cancelar</string>
     <string name="dialog_message">Esta seguro que quiere borrar estas notas?</string>
     <string name="dialog_title">Advertencia!</string>
-    <string name="info_saved">Info guardada</string>
+    <string name="info_saved">Datos guardada</string>
     <string name="title_msg_empty">El titulo no puede ser vacio</string>
     <string name="menu_settings">Herramientas</string>
     <string name="logout">Cerrar Sesion</string>
     <string name="handy_notepad_v1_0">Handy Notepad v1.0</string>
-    <string name="export_notes">Export notes</string>
-    <string name="files_exported_msg">Files has been exported to sd card</string>
-    <string name="sd_card_detected_msg">SD Card not detected</string>
-    <string name="update_android_msg">Need to update you Android version to 6.0 or higher</string>
-    <string name="sd_card_msg">No SD Card is available for read and write data</string>
+    <string name="export_notes">Export notas</string>
+    <string name="files_exported_msg">Los archivos han sido exportados a la tarjeta externa</string>
+    <string name="sd_card_detected_msg">Tarjeta SD Card no detectada</string>
+    <string name="update_android_msg">Necesita actualizar a la version 6.0 o superior</string>
+    <string name="sd_card_msg">Tarjeta SD no disponible para lectura/escritura</string>
+    <string name="permissions_granted_msg">Permisos concedidos!</string>
 </resources>

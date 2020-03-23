@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.devproject.fagundezdev.handynotepad.BuildConfig
 import com.devproject.fagundezdev.handynotepad.R
+import com.devproject.fagundezdev.handynotepad.utils.CheckingPermissions
 import com.devproject.fagundezdev.handynotepad.utils.Constants
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
