@@ -63,6 +63,10 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
         repository.checkBoxUnsuscribed()
     }
 
+    fun selectAllNotes(value : Boolean) {
+        repository.selectAllNotes(value)
+    }
+
     //***************************************************************
     // Shared Preferences access methods
     //***************************************************************
@@ -128,6 +132,5 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     fun writeFilesInSDCard(fileDir: File) {
         repository.writeFilesInSDCard(fileDir)
     }
-
 
 }

@@ -31,7 +31,7 @@
     <string name="permissions_for_images">Permissions are necessary for handling images and files</string>
     <string name="one_time_register">Only one time register. Protect your notes with an username and password.</string>
     <string name="notes_pictures">Save your notes with a picture. From Gallery or Camera.</string>
-    <string name="notes_external_card">Send your notes to an external memory card.</string>
+    <string name="notes_external_card">Send your notes to the internal phone memory.</string>
     <string name="dialog_delete">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_message">Are you sure you want to delete these notes?</string>
@@ -42,11 +42,12 @@
     <string name="logout">Logout</string>
     <string name="handy_notepad_v1_0">Handy Notepad v1.0</string>
     <string name="export_notes">Export notes</string>
-    <string name="files_exported_msg">Files has been exported to sd card</string>
+    <string name="files_exported_msg">Files has been exported to the internal memory.</string>
     <string name="sd_card_detected_msg">SD Card not detected</string>
     <string name="update_android_msg">Need to update you Android version to 6.0 or higher</string>
     <string name="sd_card_msg">No SD Card is available for read and write data</string>
     <string name="permissions_granted_msg">Permissions granted!</string>
     <string name="gallery_selected">Gallery selected</string>
     <string name="camera_selected">Camera selected</string>
+    <string name="select_all">Select all</string>
 </resources>

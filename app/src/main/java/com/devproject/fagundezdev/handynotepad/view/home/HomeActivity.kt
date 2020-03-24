@@ -43,6 +43,8 @@ class HomeActivity : AppCompatActivity() {
     private var isUpdatingNote = true
     // How many checkbox have been pressed
     private var checkBoxPressed = 0
+    // Set all selected items
+    private var allNotesChecked = false
 
     //*****************************
     // Notes variables, Temp data
@@ -56,8 +58,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        checkBoxPressed = 0
 
         setupRecyclerView()
         setupViewModel()
@@ -86,6 +86,16 @@ class HomeActivity : AppCompatActivity() {
                     .replace(R.id.detailFragmentContainer, settingsFragment)
                     .addToBackStack(settingsFragment.tag)
                     .commit()
+            }
+            R.id.menu_select_all_settings -> {
+                allNotesChecked = !allNotesChecked
+
+                when(allNotesChecked){
+                    true ->  checkBoxPressed = 1
+                    else -> checkBoxPressed = 0
+                }
+                viewModel.selectAllNotes(allNotesChecked)
+
             }
         }
         return super.onOptionsItemSelected(item)
@@ -118,6 +128,7 @@ class HomeActivity : AppCompatActivity() {
         //****************************************
         fabDeleteNotes.setOnClickListener {
             if (checkBoxPressed > 0){
+                Timber.i("Entre a borrar")
                 //******************************
                 // Create an Alert Dialog
                 // Asking about to delete notes

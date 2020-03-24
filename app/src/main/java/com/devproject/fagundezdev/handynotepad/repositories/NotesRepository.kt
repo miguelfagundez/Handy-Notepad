@@ -106,6 +106,11 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         }
     }
 
+
+    fun selectAllNotes(value : Boolean) {
+        notesDao?.selectAllNotes(value)
+    }
+
     //*********************************************
     // Share preferences
     //*********************************************
@@ -163,5 +168,6 @@ class NotesRepository(private val notesDao:NotesDAO?) {
             }
         }
     }
+
 
 }

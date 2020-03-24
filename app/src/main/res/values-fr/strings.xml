@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Handy Notepad</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="sign_in">Se connecter</string>
+    <string name="register">S\'inscrire</string>
+    <string name="confirm_username">Confirmer le nom d\'utilisateur</string>
+    <string name="confirm_password">Confirmer le mot de passe</string>
+    <string name="note_title">Le Titre</string>
+    <string name="note_description">La description</string>
+    <string name="note_body">Corps du texte</string>
+    <string name="add_note">Ajout d\'une note</string>
+    <string name="back">Retour</string>
+    <string name="next">Prochain</string>
+    <string name="data_empty">Les données ne peuvent pas être vides</string>
+    <string name="data_no_match">Les données ne correspondent pas</string>
+    <string name="data_correct">Enregistrement de l\'utilisateur réussi</string>
+    <string name="data_login_correct">Les données acceptées</string>
+    <string name="stay_signed_in">Rester connecté</string>
+    <string name="update_note_title">Mettre à jour une note</string>
+    <string name="Add_new_note_title">Ajouter une nouvelle note</string>
+    <string name="current_time">Heure actuelle:</string>
+    <string name="creation_time">Date de création:</string>
+    <string name="creation_date">Date de création:</string>
+    <string name="last_edit">Dernière modification:</string>
+    <string name="none_notes_selected">Aucune note n\'a été sélectionnée</string>
+    <string name="delete_some_notes">Certaines notes ont été supprimées..</string>
+    <string name="open_camera">Ouvrir la caméra</string>
+    <string name="choose_from_gallery">Ouvrir la galerie</string>
+    <string name="new_note">Nouvelle note</string>
+    <string name="permissions_for_images">Les autorisations sont nécessaires pour gérer les images et les fichiers</string>
+    <string name="one_time_register">Une seule inscription. Protégez vos notes avec un nom d\'utilisateur et un mot de passe.</string>
+    <string name="notes_pictures">Enregistrez vos notes avec une photo. Depuis la galerie ou l\'appareil photo.</string>
+    <string name="notes_external_card">Envoyez vos notes au téléphone à mémoire interne.</string>
+    <string name="dialog_delete">Supprimer</string>
+    <string name="dialog_cancel">Annuler</string>
+    <string name="dialog_message">Voulez-vous vraiment supprimer ces notes?</string>
+    <string name="dialog_title">Avertissement!</string>
+    <string name="info_saved">Données enregistrées</string>
+    <string name="title_msg_empty">Le titre ne peut pas être vide</string>
+    <string name="menu_settings">Réglages</string>
+    <string name="logout">Fermer la session</string>
+    <string name="handy_notepad_v1_0">Handy Notepad v1.0</string>
+    <string name="export_notes">Exporter des notes</string>
+    <string name="files_exported_msg">Les fichiers ont été exportés vers la mémoire du téléphone</string>
+    <string name="sd_card_detected_msg">Carte SD non détectée</string>
+    <string name="update_android_msg">Besoin de mettre à jour votre version Android vers 6.0 ou supérieure</string>
+    <string name="sd_card_msg">Aucune carte SD n\'est disponible pour lire et écrire des données</string>
+    <string name="permissions_granted_msg">Autorisations accordées!</string>
+    <string name="gallery_selected">Galerie sélectionnée</string>
+    <string name="camera_selected">Caméra sélectionnée</string>
+    <string name="select_all">Tout sélectionner</string>
+</resources>

@@ -48,4 +48,7 @@ interface NotesDAO {
 
     @Query("SELECT COUNT(id) FROM notes_table")
     fun getNumberNotes() : Int
+
+    @Query("UPDATE notes_table SET isSelected = :value")
+    fun selectAllNotes(value : Boolean)
 }

@@ -133,7 +133,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDetailsBody"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_290dp"
+            android:layout_height="@dimen/dimen_560dp"
             android:scrollbars="vertical"
             android:gravity="top"
             android:inputType="textMultiLine" />
