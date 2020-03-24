@@ -45,4 +45,7 @@ interface NotesDAO {
 
     @Query("SELECT * FROM notes_table WHERE id = :idValue")
     suspend fun getNote(idValue : Long?) : Notes
+
+    @Query("SELECT COUNT(id) FROM notes_table")
+    fun getNumberNotes() : Int
 }

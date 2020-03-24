@@ -48,11 +48,8 @@ class NotesAdapter(private val context: Context, private val itemClickListener: 
                 // Default image (logo app)
                 Glide.with(image).load(R.drawable.ic_launcher_foreground).into(image)
 
-                Timber.i("Default Image")
             }else{
 
-                Timber.i("Gallery Image")
-                Timber.i("Adapter: ${currentNote.image_url}")
                 // Custom image (Camera || Gallery)
                 Glide.with(image).load(currentNote.image_url).into(image)
             }

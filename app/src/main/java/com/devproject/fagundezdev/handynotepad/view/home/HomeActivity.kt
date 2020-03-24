@@ -170,8 +170,6 @@ class HomeActivity : AppCompatActivity() {
                 bundle.putInt(Constants.PRIORITY, priority)
                 bundle.putString(Constants.IMAGE_URL, imageUrl)
 
-                Timber.i("Home Activity: $imageUrl")
-
                 bundle.putBoolean(Constants.IS_ADD_NOTE, isUpdatingNote)
                 bundle.putString(Constants.CREATION_DATE, creationDate)
                 bundle.putString(Constants.LAST_EDIT_DATE, editDate)

@@ -47,4 +47,6 @@
     <string name="update_android_msg">Need to update you Android version to 6.0 or higher</string>
     <string name="sd_card_msg">No SD Card is available for read and write data</string>
     <string name="permissions_granted_msg">Permissions granted!</string>
+    <string name="gallery_selected">Gallery selected</string>
+    <string name="camera_selected">Camera selected</string>
 </resources>

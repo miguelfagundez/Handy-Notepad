@@ -48,4 +48,6 @@
     <string name="update_android_msg">Necesita actualizar a la version 6.0 o superior</string>
     <string name="sd_card_msg">Tarjeta SD no disponible para lectura/escritura</string>
     <string name="permissions_granted_msg">Permisos concedidos!</string>
+    <string name="gallery_selected">Gallery selected</string>
+    <string name="camera_selected">Camera selected</string>
 </resources>

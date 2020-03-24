@@ -1,7 +1,6 @@
 package com.devproject.fagundezdev.handynotepad.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -13,6 +12,7 @@ import com.devproject.fagundezdev.handynotepad.repositories.NotesRepository
 import com.devproject.fagundezdev.handynotepad.utils.ResponseObj
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.File
 
 /********************************************
  * ViewModel - NotesViewModel
@@ -38,11 +38,6 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     // Database access methods
     //***************************************************************
 
-    /*fun insert(id: Int?, title: String, description: String, body: String, imageUrl: String,
-               priority: Int, selected: Boolean, creationDate: String, editDate: String) = viewModelScope.launch {
-         repository.insertNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate)
-    }*/
-
     fun insert(id: Long?, title: String, description: String, body: String, imageUrl: String,
                priority: Int, selected: Boolean, creationDate: String, editDate: String) : Long {
         return repository.insertNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate)
@@ -65,7 +60,6 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     }
 
     fun checkBoxUnsuscribed()  = viewModelScope.launch {
-        Timber.i("ViewModel Unsuscribed")
         repository.checkBoxUnsuscribed()
     }
 
@@ -126,6 +120,13 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
 
     fun isSignInChecked(checked: Boolean) {
         repository.loginUser(checked)
+    }
+
+    //***************************************************************
+    // File access methods
+    //***************************************************************
+    fun writeFilesInSDCard(fileDir: File) {
+        repository.writeFilesInSDCard(fileDir)
     }
 
 

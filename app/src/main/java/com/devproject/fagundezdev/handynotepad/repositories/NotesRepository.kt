@@ -1,12 +1,19 @@
 package com.devproject.fagundezdev.handynotepad.repositories
 
+import android.provider.Settings
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import com.devproject.fagundezdev.handynotepad.model.db.NotesDAO
 import com.devproject.fagundezdev.handynotepad.model.sharedpreferences.NoteSharedPreferences
 import com.devproject.fagundezdev.handynotepad.utils.Constants
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 /********************************************
  * Repository - NotesRepository
@@ -22,7 +29,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
     var numberNotes = listNotes?.value?.size?:0
 
     init {
-        listNotes = notesDao?.getAllNotes()
+            listNotes = notesDao?.getAllNotes()
     }
 
     //**********************************
@@ -49,11 +56,6 @@ class NotesRepository(private val notesDao:NotesDAO?) {
     //*********************************************
     // Room Database
     //*********************************************
-    /*suspend fun insertNote(id: Int?, title: String, description: String, body: String, imageUrl: String,
-                           priority: Int, selected: Boolean, creationDate: String, editDate: String){
-        notesDao?.insertNote(createNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate))
-        numberNotes += 1
-    }*/
     fun insertNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
                    priority: Int, selected: Boolean, creationDate: String, editDate: String) : Long{
         numberNotes += 1
@@ -81,15 +83,11 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         var size = notes?.size?:0
         size -= 1
 
-        Timber.i("SIZE: $size")
-
         if (size >= 0){
             for(i in 0..size){
                 if(notes?.get(i)?.isSelected == true) {
                     notesDao?.deleteNote(notes.get(i))
                     numberNotes -= 1
-
-                    Timber.i("Note deleted(position): $i")
                 }
             }
         }
@@ -100,14 +98,10 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         var size = notes?.size?:0
         size -= 1
 
-        Timber.i("SIZE: $size")
-
         for(i in 0..size){
             if(notes?.get(i)?.isSelected == true) {
                 notes?.get(i)?.isSelected = false
                 notesDao?.updateNote(notes.get(i))
-
-                Timber.i("i: $i")
             }
         }
     }
@@ -148,4 +142,26 @@ class NotesRepository(private val notesDao:NotesDAO?) {
     fun isLogged(): Boolean? {
         return NoteSharedPreferences.readBoolean(Constants.IS_LOGGED_IN)
     }
+
+    // Writing notes in a files into SD Card
+    fun writeFilesInSDCard(fileDir: File) {
+        val job = GlobalScope.launch {
+            val notes = notesDao?.getAllNotesByPriorityASC()
+            val number = notesDao?.getNumberNotes()?:0
+            fileDir.mkdir()
+
+            for (i in 0..number-1){
+                var myFile = File(fileDir,notes?.get(i)?.title + ".txt")
+                var osFile: FileOutputStream?
+                try {
+                    osFile = FileOutputStream(myFile)
+                    osFile.write(notes?.get(i)?.body?.toByteArray())
+                    osFile.close()
+                }catch (e: IOException){
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
 }

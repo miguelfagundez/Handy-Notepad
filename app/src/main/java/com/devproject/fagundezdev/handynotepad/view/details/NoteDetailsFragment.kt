@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.devproject.fagundezdev.handynotepad.BuildConfig
 import com.devproject.fagundezdev.handynotepad.R
-import com.devproject.fagundezdev.handynotepad.utils.CheckingPermissions
 import com.devproject.fagundezdev.handynotepad.utils.Constants
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
@@ -76,6 +75,10 @@ class NoteDetailsFragment : Fragment() {
         setupImageDialog()
     }
 
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+    }
+
     private fun setupImageDialog() {
         // Image was pressed
         ivDetailsImage.setOnClickListener {
@@ -101,7 +104,7 @@ class NoteDetailsFragment : Fragment() {
         textViewGallery.setOnClickListener {
             val intentGallery = Intent(Intent.ACTION_OPEN_DOCUMENT/*Intent.ACTION_PICK*/, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intentGallery, Constants.REQUEST_CODE_GALLERY)
-            toast("Gallery selected")
+            toast(getString(R.string.gallery_selected))
             dialog.hide()
         }
 
@@ -128,7 +131,7 @@ class NoteDetailsFragment : Fragment() {
                 }
 
             }
-            toast("Camera selected")
+            toast(getString(R.string.camera_selected))
             dialog.hide()
         }
 
@@ -203,10 +206,6 @@ class NoteDetailsFragment : Fragment() {
         image_url = selectedGalleryImage.toString()
     }
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
-    }
-
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
 
@@ -235,9 +234,8 @@ class NoteDetailsFragment : Fragment() {
             //****************************
             setEditableComponents(false)
 
-            Timber.i("No deberia estar aqui")
-            arguments?.getInt(Constants.ID).let { noteID ->
-                if (noteID != -1){
+            arguments?.getLong(Constants.ID).let { noteID ->
+                if (noteID != -1L){
 
          //TODO("Refactor code - if/else - One call arguments")
 
@@ -256,7 +254,6 @@ class NoteDetailsFragment : Fragment() {
                     if (image.isNullOrEmpty()||image.isNullOrBlank()){
                         Glide.with(ivDetailsImage).load(R.drawable.ic_launcher_foreground).into(ivDetailsImage)
                     }else{
-                        Timber.i("Details Fragment: $image")
 
                         Glide.with(ivDetailsImage).load(image).into(ivDetailsImage)
                         /*val imageUri : Uri? = image.toUri()
@@ -317,8 +314,6 @@ class NoteDetailsFragment : Fragment() {
         // Knowing if data is updating or new
         if (isUpdating == true){
             // Updating
-            Timber.i("Updating a note")
-            Timber.i("Values: $isUpdating and $firstTime")
             when(firstTime){
                 true -> noteID = arguments?.getLong(Constants.ID)
                 else -> Timber.i("isUpdating == true and noteID = $noteID")
@@ -334,8 +329,6 @@ class NoteDetailsFragment : Fragment() {
 
         }else{
             // New note
-            Timber.i("Nueva nota")
-            Timber.i("Values: $isUpdating and $firstTime")
             noteID = null
             title = etDetailsTitle.text.toString()
             description = etDetailsDescription.text.toString()

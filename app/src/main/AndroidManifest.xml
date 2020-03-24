@@ -16,8 +16,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.settings.SettingsFragment"></activity>
         <activity android:name=".view.home.HomeActivity" />
-        <activity android:name=".view.auth.LoginActivity" />
-        <activity android:name=".view.onboarding.OnboardingActivity">
+        <activity android:name=".view.auth.LoginActivity"
+            android:theme="@style/AppNoActionBar"/>
+        <activity android:name=".view.onboarding.OnboardingActivity"
+            android:theme="@style/AppNoActionBar">
         </activity>
         <activity
             android:name=".view.auth.SplashActivity">

@@ -1,10 +1,7 @@
 package com.devproject.fagundezdev.handynotepad.view.settings
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
@@ -23,6 +20,9 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 /********************************************
  * Fragment - NoteDetailsFragment
@@ -58,7 +58,6 @@ class SettingsFragment : Fragment() {
 
     // TEMPORAL
     private fun setupListeners() {
-        val string = "example data"
         // Export files option
         btnSettingExport.setOnClickListener {
 
@@ -69,20 +68,14 @@ class SettingsFragment : Fragment() {
             if (Environment.MEDIA_MOUNTED.equals(state)) {
                 // Permissions temporal
                 if (checkPermissions()) {
-                    //val sdCard : File? = Environment.getExternalStorageDirectory()
+                    // Creating the file directory
                     var sdCard : File? = activity?.applicationContext?.getExternalFilesDir(null)
-                    val fileDir = File(sdCard?.absolutePath + "/handynotes/")
-                    Timber.i("Absolute path: ${fileDir.absolutePath}")
-                    fileDir.mkdir()
-                    var myFile = File(fileDir, "ExampleData.txt")
-                    var osFile : FileOutputStream? = null
-                    try {
-                        osFile = FileOutputStream(myFile)
-                        osFile.write(string.toByteArray())
-                        osFile.close()
-                    }catch (e: IOException){
-                        e.printStackTrace()
-                    }
+                    val timeStamp = SimpleDateFormat(Constants.DATE_PICTURE_FORMAT).format(Date())
+                    val fileDir = File(sdCard?.absolutePath + "/handynotes_" + timeStamp +"/")
+
+                    // Calling ViewModel to write the files
+                    viewModel.writeFilesInSDCard(fileDir)
+
                 } else {
                     // If permissions are not granted
                     // we request these permissions (READ and WRITE External Storage)
@@ -171,7 +164,7 @@ class SettingsFragment : Fragment() {
         when(requestCode){
             Constants.PERMISSION_FILE_CODE -> {
                 if(grantResults.isNotEmpty() and (grantResults[0] == PackageManager.PERMISSION_GRANTED)){
-                    //setupOptionDialog()
+
                 }else{
                     toast(getString(R.string.permissions_for_images))
                 }
