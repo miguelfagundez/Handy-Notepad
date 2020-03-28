@@ -1,8 +1,10 @@
 package com.devproject.fagundezdev.handynotepad.repositories
 
+import android.provider.ContactsContract
 import android.provider.Settings
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import com.devproject.fagundezdev.handynotepad.model.db.NotesDAO
 import com.devproject.fagundezdev.handynotepad.model.sharedpreferences.NoteSharedPreferences
@@ -111,6 +113,34 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         notesDao?.selectAllNotes(value)
     }
 
+    //***************************************************************
+    // Helper function to sort database data
+    //***************************************************************
+
+    // TITLE
+    fun getListNotesAsc() : List<Notes>? {
+        return notesDao?.getAllNotesByTitleASC()
+    }
+
+    fun getListNotesDesc() : List<Notes>? {
+        return notesDao?.getAllNotesByTitleDESC()
+    }
+
+    // CREATION_DATE
+    fun getListNotesDateAsc() : List<Notes>? {
+        return notesDao?.getAllNotesByDateASC()
+    }
+
+    fun getListNotesDateDesc() : List<Notes>? {
+        return notesDao?.getAllNotesByDateDESC()
+    }
+
+    // LAST_EDIT
+    fun getListNotesLastEditAsc() : List<Notes>? {
+        return notesDao?.getAllNotesByLastEditASC()
+    }
+
+
     //*********************************************
     // Share preferences
     //*********************************************
@@ -168,6 +198,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
             }
         }
     }
+
 
 
 }

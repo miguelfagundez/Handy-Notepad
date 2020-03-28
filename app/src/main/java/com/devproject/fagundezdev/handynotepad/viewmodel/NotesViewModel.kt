@@ -1,8 +1,10 @@
 package com.devproject.fagundezdev.handynotepad.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
@@ -66,6 +68,34 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     fun selectAllNotes(value : Boolean) {
         repository.selectAllNotes(value)
     }
+
+    //***************************************************************
+    // Helper function to sort database data
+    //***************************************************************
+
+    // TITLE
+    fun getListNotesAsc() : List<Notes>? {
+        return repository.getListNotesAsc()
+    }
+
+    fun getListNotesDesc() : List<Notes>? {
+        return repository.getListNotesDesc()
+    }
+
+    // CREATION_DATE
+    fun getListNotesDateAsc() : List<Notes>? {
+        return repository.getListNotesDateAsc()
+    }
+
+    fun getListNotesDateDesc() : List<Notes>? {
+        return repository.getListNotesDateDesc()
+    }
+
+    // LAST_EDIT
+    fun getListNotesLastEditAsc() : List<Notes>? {
+        return repository.getListNotesLastEditAsc()
+    }
+
 
     //***************************************************************
     // Shared Preferences access methods

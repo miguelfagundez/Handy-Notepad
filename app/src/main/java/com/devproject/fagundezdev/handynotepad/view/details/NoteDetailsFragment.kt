@@ -344,6 +344,7 @@ class NoteDetailsFragment : Fragment() {
 
     }
 
+
     // Update: value -> false
     // New Note: value -> true
     fun setEditableComponents(value: Boolean){

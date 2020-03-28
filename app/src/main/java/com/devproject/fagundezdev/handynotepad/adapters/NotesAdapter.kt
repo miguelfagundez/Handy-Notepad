@@ -10,12 +10,15 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SortedList
 import com.bumptech.glide.Glide
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.listeners.NoteClickListener
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import kotlinx.android.synthetic.main.note_item_layout.view.*
 import timber.log.Timber
+import java.util.*
+import kotlin.collections.ArrayList
 
 /********************************************
  * Adapter - NotesAdapter
@@ -28,6 +31,7 @@ class NotesAdapter(private val context: Context, private val itemClickListener: 
 
     private var inflater = LayoutInflater.from(context)
     private var notes = emptyList<Notes>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.note_item_layout, parent, false)
@@ -88,4 +92,5 @@ class NotesAdapter(private val context: Context, private val itemClickListener: 
         this.notes = notes
         notifyDataSetChanged()
     }
+
 }

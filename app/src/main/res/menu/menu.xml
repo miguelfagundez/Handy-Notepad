@@ -15,4 +15,35 @@
         android:title="@string/select_all"
         android:icon="@drawable/ic_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_order_asc"
+        android:orderInCategory="100"
+        android:title="@string/sort_a_z"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_order_desc"
+        android:orderInCategory="100"
+        android:title="@string/sort_z_a"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_order_date_asc"
+        android:orderInCategory="100"
+        android:title="@string/sort_date_newest"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_order_date_desc"
+        android:orderInCategory="100"
+        android:title="@string/sort_date_oldest"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_order_last_edit_asc"
+        android:orderInCategory="100"
+        android:title="@string/sort_last_edit"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
 </menu>

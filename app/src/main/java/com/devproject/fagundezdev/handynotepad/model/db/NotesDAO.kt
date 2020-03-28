@@ -1,6 +1,7 @@
 package com.devproject.fagundezdev.handynotepad.model.db
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 
@@ -18,7 +19,7 @@ interface NotesDAO {
     // is updated automatically when the data
     // changes
     @Query("SELECT * FROM notes_table")
-    fun getAllNotes():LiveData<List<Notes>>
+    fun getAllNotes(): LiveData<List<Notes>>
 
     @Insert(onConflict = REPLACE)
     //suspend fun insertNote(note:Notes?)
@@ -36,6 +37,24 @@ interface NotesDAO {
 
     @Query("SELECT * FROM notes_table ORDER BY priority DESC")
     suspend fun getAllNotesByPriorityDESC():List<Notes>
+
+    // Get the notes order by title (A..Z) and (Z..A)
+    @Query("SELECT * FROM notes_table ORDER BY UPPER(title) ASC")
+    fun getAllNotesByTitleASC():List<Notes>
+
+    @Query("SELECT * FROM notes_table ORDER BY UPPER(title) DESC")
+    fun getAllNotesByTitleDESC():List<Notes>
+
+    // Get the notes order by date (Creation date)
+    @Query("SELECT * FROM notes_table ORDER BY creation_date ASC")
+    fun getAllNotesByDateASC():List<Notes>
+
+    @Query("SELECT * FROM notes_table ORDER BY creation_date DESC")
+    fun getAllNotesByDateDESC():List<Notes>
+
+    // Get the notes order by date (Last edit)
+    @Query("SELECT * FROM notes_table ORDER BY edit_date ASC")
+    fun getAllNotesByLastEditASC():List<Notes>
 
     @Query("SELECT * FROM notes_table GROUP BY isSelected")
     suspend fun getAllNotesByGroup():List<Notes>

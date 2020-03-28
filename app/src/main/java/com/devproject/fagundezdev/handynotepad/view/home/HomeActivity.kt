@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.adapters.NotesAdapter
 import com.devproject.fagundezdev.handynotepad.listeners.NoteClickListener
+import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import com.devproject.fagundezdev.handynotepad.utils.Constants
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.view.details.NoteDetailsFragment
@@ -45,6 +46,8 @@ class HomeActivity : AppCompatActivity() {
     private var checkBoxPressed = 0
     // Set all selected items
     private var allNotesChecked = false
+    // Sorting value
+    private var isAscending = true
 
     //*****************************
     // Notes variables, Temp data
@@ -59,9 +62,74 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        setupNoteClickListener()
         setupRecyclerView()
         setupViewModel()
         setupFloatingActionButtons()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+        viewModel.listNotes?.observe(this@HomeActivity, Observer { notes ->
+            notes?.let {listOfNotes ->
+                adapter.setNotes(listOfNotes)
+            }
+        })
+    }
+
+    private fun setupRecyclerView() {
+
+        adapter = NotesAdapter(this, itemClickListener)
+        rvListNotes.adapter = adapter
+        rvListNotes.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun setupNoteClickListener() {
+        itemClickListener = object : NoteClickListener{
+            override fun onDetailsNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
+                                       priority: Int, selected: Boolean, creationDate: String, editDate: String) {
+                isUpdatingNote = true
+
+                val bundle = Bundle()
+
+                bundle.putLong(Constants.ID, id?:-1)
+                bundle.putString(Constants.TITLE, title)
+                bundle.putString(Constants.DESCRIPTION, description)
+                bundle.putString(Constants.BODY, body)
+                bundle.putBoolean(Constants.IS_SELECTED, selected)
+                bundle.putInt(Constants.PRIORITY, priority)
+                bundle.putString(Constants.IMAGE_URL, imageUrl)
+
+                bundle.putBoolean(Constants.IS_ADD_NOTE, isUpdatingNote)
+                bundle.putString(Constants.CREATION_DATE, creationDate)
+                bundle.putString(Constants.LAST_EDIT_DATE, editDate)
+
+                noteDetailsFragment.arguments = bundle
+
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.slide_out,
+                        R.anim.slide_in,
+                        R.anim.slide_out
+                    )
+                    .replace(R.id.detailFragmentContainer, noteDetailsFragment)
+                    .addToBackStack(noteDetailsFragment.tag)
+                    .commit()
+            }
+
+            override fun onCheckBoxPressed(id:Long?, selected:Boolean) {
+                if (selected == true){
+                    checkBoxPressed += 1
+                }else{
+                    checkBoxPressed -= 1
+                }
+                // Update note into Database
+                // Ready for delete
+                viewModel.updateSelected(id, selected)
+            }
+
+        }
     }
 
     //*************************************************
@@ -75,6 +143,7 @@ class HomeActivity : AppCompatActivity() {
     // Action if button is pressed: calling settings
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            // MENU: Settings
             R.id.menu_action_settings -> {
                 supportFragmentManager.beginTransaction()
                     .setCustomAnimations(
@@ -87,6 +156,7 @@ class HomeActivity : AppCompatActivity() {
                     .addToBackStack(settingsFragment.tag)
                     .commit()
             }
+            // MENU: Select all card views
             R.id.menu_select_all_settings -> {
                 allNotesChecked = !allNotesChecked
 
@@ -97,6 +167,36 @@ class HomeActivity : AppCompatActivity() {
                 viewModel.selectAllNotes(allNotesChecked)
 
             }
+            // MENU: Sort ASC (A..Z)
+            R.id.menu_order_asc -> {
+                viewModel.getListNotesAsc()?.let { listAsc ->
+                    adapter.setNotes(listAsc)
+                }
+            }
+            // MENU: Sort DESC (Z..A)
+            R.id.menu_order_desc -> {
+                viewModel.getListNotesDesc()?.let { listDesc ->
+                    adapter.setNotes(listDesc)
+                }
+            }
+
+            // MENU: Sort by creation_date
+            R.id.menu_order_date_asc ->{
+                viewModel.getListNotesDateAsc()?.let { listAsc ->
+                adapter.setNotes(listAsc)
+            }}
+            R.id.menu_order_date_desc -> {
+                viewModel.getListNotesDateDesc()?.let { listDesc ->
+                    adapter.setNotes(listDesc)
+                }
+            }
+
+            // MENU: Sort by last_edit
+            R.id.menu_order_last_edit_asc ->{
+                viewModel.getListNotesLastEditAsc()?.let { listAsc ->
+                    adapter.setNotes(listAsc)
+                }}
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -155,67 +255,10 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
-        viewModel.listNotes?.observe(this@HomeActivity, Observer { notes ->
-            notes?.let {
-                adapter.setNotes(it)
-            }
-        })
+    override fun onBackPressed() {
+        Log.i("Test","Number of fragments (onBackPressed): ${supportFragmentManager?.backStackEntryCount}")
+        super.onBackPressed()
     }
-
-    private fun setupRecyclerView() {
-
-        itemClickListener = object : NoteClickListener{
-            override fun onDetailsNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
-                                       priority: Int, selected: Boolean, creationDate: String, editDate: String) {
-                isUpdatingNote = true
-
-                val bundle = Bundle()
-
-                bundle.putLong(Constants.ID, id?:-1)
-                bundle.putString(Constants.TITLE, title)
-                bundle.putString(Constants.DESCRIPTION, description)
-                bundle.putString(Constants.BODY, body)
-                bundle.putBoolean(Constants.IS_SELECTED, selected)
-                bundle.putInt(Constants.PRIORITY, priority)
-                bundle.putString(Constants.IMAGE_URL, imageUrl)
-
-                bundle.putBoolean(Constants.IS_ADD_NOTE, isUpdatingNote)
-                bundle.putString(Constants.CREATION_DATE, creationDate)
-                bundle.putString(Constants.LAST_EDIT_DATE, editDate)
-
-                noteDetailsFragment.arguments = bundle
-
-                supportFragmentManager.beginTransaction()
-                    .setCustomAnimations(
-                        R.anim.slide_in,
-                        R.anim.slide_out,
-                        R.anim.slide_in,
-                        R.anim.slide_out
-                    )
-                    .replace(R.id.detailFragmentContainer, noteDetailsFragment)
-                    .addToBackStack(noteDetailsFragment.tag)
-                    .commit()
-            }
-
-            override fun onCheckBoxPressed(id:Long?, selected:Boolean) {
-                if (selected == true){
-                    checkBoxPressed += 1
-                }else{
-                    checkBoxPressed -= 1
-                }
-                // Update note into Database
-                // Ready for delete
-                viewModel.updateSelected(id, selected)
-            }
-
-        }
-        adapter = NotesAdapter(this, itemClickListener)
-        rvListNotes.adapter = adapter
-        rvListNotes.layoutManager = LinearLayoutManager(this)
-    }
-
     override fun onPause() {
         // Avoiding databse problems
         viewModel.checkBoxUnsuscribed()
