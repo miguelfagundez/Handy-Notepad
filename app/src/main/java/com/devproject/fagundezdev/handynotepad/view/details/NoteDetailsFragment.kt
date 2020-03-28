@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -125,7 +126,8 @@ class NoteDetailsFragment : Fragment() {
 
                     Timber.i("${imageFile.absolutePath}")
 
-                    image_url = imageFile.absolutePath
+                    //image_url = imageFile.absolutePath
+                    image_url = imageUri.toString()
                     intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
                     startActivityForResult(intentCamera, Constants.REQUEST_CODE_CAMERA)
                 }

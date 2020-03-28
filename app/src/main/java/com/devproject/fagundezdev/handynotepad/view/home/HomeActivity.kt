@@ -255,10 +255,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        Log.i("Test","Number of fragments (onBackPressed): ${supportFragmentManager?.backStackEntryCount}")
-        super.onBackPressed()
-    }
+
     override fun onPause() {
         // Avoiding databse problems
         viewModel.checkBoxUnsuscribed()
