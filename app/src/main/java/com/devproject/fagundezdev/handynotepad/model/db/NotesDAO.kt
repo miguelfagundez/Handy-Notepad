@@ -46,14 +46,14 @@ interface NotesDAO {
     fun getAllNotesByTitleDESC():List<Notes>
 
     // Get the notes order by date (Creation date)
-    @Query("SELECT * FROM notes_table ORDER BY creation_date ASC")
+    @Query("SELECT * FROM notes_table ORDER BY creation_date DESC")
     fun getAllNotesByDateASC():List<Notes>
 
-    @Query("SELECT * FROM notes_table ORDER BY creation_date DESC")
+    @Query("SELECT * FROM notes_table ORDER BY creation_date ASC")
     fun getAllNotesByDateDESC():List<Notes>
 
     // Get the notes order by date (Last edit)
-    @Query("SELECT * FROM notes_table ORDER BY edit_date ASC")
+    @Query("SELECT * FROM notes_table ORDER BY edit_date DESC")
     fun getAllNotesByLastEditASC():List<Notes>
 
     @Query("SELECT * FROM notes_table GROUP BY isSelected")

@@ -50,9 +50,10 @@
     <string name="gallery_selected">Gallery selected</string>
     <string name="camera_selected">Camera selected</string>
     <string name="select_all">Select all</string>
-    <string name="sort_a_z">Sort A..Z</string>
-    <string name="sort_z_a">Sort Z..A</string>
-    <string name="sort_date_newest">Sort Date Newest</string>
-    <string name="sort_date_oldest">Sort Date Oldest</string>
-    <string name="sort_last_edit">Sort Last Edit</string>
+    <string name="sort_a_z">A..Z</string>
+    <string name="sort_z_a">Z..A</string>
+    <string name="sort_date_newest">Date Newest</string>
+    <string name="sort_date_oldest">Date Oldest</string>
+    <string name="sort_last_edit">Last Edit</string>
+    <string name="sort_by">Sort by</string>
 </resources>

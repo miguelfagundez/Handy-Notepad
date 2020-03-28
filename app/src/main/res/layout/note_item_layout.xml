@@ -62,8 +62,8 @@
 
     <ImageView
         android:id="@+id/ivItemNoteImage"
-        android:layout_width="@dimen/dimen_40dp"
-        android:layout_height="@dimen/dimen_40dp"
+        android:layout_width="@dimen/dimen_56dp"
+        android:layout_height="@dimen/dimen_56dp"
         android:layout_marginStart="@dimen/dimen_8dp"
         android:layout_marginEnd="@dimen/dimen_8dp"
         android:src="@drawable/ic_launcher_foreground"
