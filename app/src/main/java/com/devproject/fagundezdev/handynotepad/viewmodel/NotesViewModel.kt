@@ -2,10 +2,12 @@ package com.devproject.fagundezdev.handynotepad.viewmodel
 
 import android.app.Application
 import android.util.Log
+import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.devproject.fagundezdev.handynotepad.BuildConfig
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import com.devproject.fagundezdev.handynotepad.model.db.NotesDatabase
@@ -15,6 +17,8 @@ import com.devproject.fagundezdev.handynotepad.utils.ResponseObj
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 /********************************************
  * ViewModel - NotesViewModel
@@ -161,6 +165,19 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     //***************************************************************
     fun writeFilesInSDCard(fileDir: File) {
         repository.writeFilesInSDCard(fileDir)
+    }
+
+    fun shareNote(noteID: Long?, title: String, description: String, body: String) {
+        /*// We assume the file we want to load is in the documents/ subdirectory
+// of the internal storage
+File documentsPath = new File(Context.getFilesDir(), "documents");
+File file = new File(documentsPath, "sample.pdf");
+// This can also in one line of course:
+// File file = new File(Context.getFilesDir(), "documents/sample.pdf");
+
+Uri uri = FileProvider.getUriForFile(getContext(), "com.mydomain.fileprovider", file);
+        * */
+
     }
 
 }

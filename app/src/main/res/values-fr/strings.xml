@@ -58,4 +58,6 @@
     <string name="sort_date_oldest">Date la plus ancienne</string>
     <string name="sort_last_edit">Dernière édition</string>
     <string name="sort_by">Trier par</string>
+    <string name="file_creating">Traitement de cette note..</string>
+    <string name="select_app">Sélectionnez une appli:</string>
 </resources>

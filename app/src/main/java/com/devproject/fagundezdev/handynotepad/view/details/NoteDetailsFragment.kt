@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -26,6 +27,8 @@ import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.fragment_notes_details.*
 import timber.log.Timber
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -217,10 +220,23 @@ class NoteDetailsFragment : Fragment() {
 
         cleanComponents()
 
+        //***********************
+        // SetUp ClickListener
+        //***********************
         fabDetailsSave.setOnClickListener {
             if(etDetailsTitle.text.isNotBlank()) {
                 toast(getString(R.string.info_saved))
                 saveData()
+            }else{
+                toast(getString(R.string.title_msg_empty))
+            }
+        }
+
+        fabDetailsShare.setOnClickListener {
+            if(etDetailsTitle.text.isNotBlank()) {
+                toast(getString(R.string.file_creating))
+                saveData()
+                shareFile()
             }else{
                 toast(getString(R.string.title_msg_empty))
             }
@@ -307,6 +323,17 @@ class NoteDetailsFragment : Fragment() {
         }
     }
 
+    // Sharing text plain with other apps
+    private fun shareFile() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT, title + "\n" + description + "\n\n" + body)
+        intent.type = "text/plain"
+
+        context?.startActivity(Intent.createChooser(intent, getString(R.string.select_app)))
+    }
+
+    // Saving the data into the Room DB (insert or update)
     fun saveData() {
 
         // Last edit date

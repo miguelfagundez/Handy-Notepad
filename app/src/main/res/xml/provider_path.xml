@@ -3,4 +3,8 @@
     <external-path
         name="handynotepad_path"
         path="/" />
+    
+    <files-path
+        name="file_pdf"
+        path="documents/"/>
 </paths>

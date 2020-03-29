@@ -56,4 +56,6 @@
     <string name="sort_date_oldest">Date Oldest</string>
     <string name="sort_last_edit">Last Edit</string>
     <string name="sort_by">Sort by</string>
+    <string name="file_creating">Processing this note..</string>
+    <string name="select_app">Select an app:</string>
 </resources>
