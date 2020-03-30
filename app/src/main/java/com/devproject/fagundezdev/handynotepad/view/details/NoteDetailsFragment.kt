@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.devproject.fagundezdev.handynotepad.BuildConfig
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.utils.Constants
+import com.devproject.fagundezdev.handynotepad.utils.DateUtils
 import com.devproject.fagundezdev.handynotepad.utils.toast
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 import kotlinx.android.synthetic.main.fragment_notes_details.*
@@ -78,7 +79,6 @@ class NoteDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i("Test","Fragments onViewCreated - id = $noteID")
         setupViewModel()
         setupImageDialog()
     }
@@ -141,7 +141,24 @@ class NoteDetailsFragment : Fragment() {
                 }
 
             }
-            R.id.menu_copy_note -> {}
+            R.id.menu_copy_note -> {
+                // Last edit date
+                val simpleStringDate = DateUtils.toSimpleString()
+                // New note
+                noteID = null
+                title = "Copy " + etDetailsTitle.text.toString()
+                description = etDetailsDescription.text.toString()
+                body = etDetailsBody.text.toString()
+                priority = 1
+                isSelected = false
+                edit_date = simpleStringDate
+                creation_date = simpleStringDate
+                firstTime = false
+                isUpdating = true
+                // Saving the data into Room
+                noteID = viewModel.insert(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
+                toast(getString(R.string.note_copy_successfully))
+            }
         }
 
         return super.onOptionsItemSelected(item)
@@ -354,8 +371,7 @@ class NoteDetailsFragment : Fragment() {
             // Add a new note
             //****************************
 
-            val simpleCurrentDate = SimpleDateFormat(Constants.DATE_FORMAT)
-            val simpleStringDate = simpleCurrentDate.format(Date())
+            val simpleStringDate = DateUtils.toSimpleString()
 
             creation_date = simpleStringDate
             tvDetailsCreationDateNote.setText(creation_date)
@@ -389,8 +405,7 @@ class NoteDetailsFragment : Fragment() {
     fun saveData() {
 
         // Last edit date
-        val simpleCurrentDate = SimpleDateFormat(Constants.DATE_FORMAT)
-        val simpleStringDate = simpleCurrentDate.format(Date())
+        val simpleStringDate = DateUtils.toSimpleString()
 
         // Knowing if data is updating or new
         if (isUpdating == true){

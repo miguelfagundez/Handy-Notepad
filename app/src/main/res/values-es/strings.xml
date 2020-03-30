@@ -61,4 +61,5 @@
     <string name="select_app">Seleciona una app:</string>
     <string name="make_a_copy">Make a copy</string>
     <string name="note_deleted">Note deleted successfully!</string>
+    <string name="note_copy_successfully">This note has been copied successfully!</string>
 </resources>

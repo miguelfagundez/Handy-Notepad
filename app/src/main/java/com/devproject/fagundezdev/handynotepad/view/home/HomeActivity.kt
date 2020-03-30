@@ -142,6 +142,13 @@ class HomeActivity : AppCompatActivity() {
         menu?.let {menu ->
             menu.findItem(R.id.menu_delete_note)?.isVisible = false
             menu.findItem(R.id.menu_copy_note)?.isVisible = false
+            //**********************************
+            //  -- Need to check Date format --
+            // -- For managing sort correctly --
+            //**********************************
+            menu.findItem(R.id.menu_order_last_edit_asc).isVisible = false
+            menu.findItem(R.id.menu_order_date_desc).isVisible = false
+            menu.findItem(R.id.menu_order_date_asc).isVisible = false
         }
 
         return super.onCreateOptionsMenu(menu)
