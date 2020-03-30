@@ -60,4 +60,6 @@
     <string name="sort_by">Trier par</string>
     <string name="file_creating">Traitement de cette note..</string>
     <string name="select_app">Sélectionnez une appli:</string>
+    <string name="make_a_copy">Make a copy</string>
+    <string name="note_deleted">Note deleted successfully!</string>
 </resources>

@@ -75,6 +75,10 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         notesDao?.updateNote(note)
     }
 
+    suspend fun deleteNote(id: Long?){
+        notesDao?.deleteNote(createNote(id,"","","","",0,false,"",""))
+    }
+
     suspend fun deleteAll(){
         notesDao?.deleteAllNotes()
         numberNotes = 0

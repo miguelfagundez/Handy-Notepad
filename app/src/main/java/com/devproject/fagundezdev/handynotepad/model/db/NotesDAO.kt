@@ -31,6 +31,9 @@ interface NotesDAO {
     @Delete
     suspend fun deleteNote(note:Notes)
 
+    @Query("DELETE FROM notes_table WHERE id = :idValue")
+    suspend fun deleteNote(idValue : Long?)
+
     // Get the notes order by priority values (0,1,2)
     @Query("SELECT * FROM notes_table ORDER BY priority ASC")
     suspend fun getAllNotesByPriorityASC():List<Notes>

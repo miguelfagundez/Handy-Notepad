@@ -137,6 +137,13 @@ class HomeActivity : AppCompatActivity() {
     //*************************************************
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+
+        // Invisible - it is visible for note details only
+        menu?.let {menu ->
+            menu.findItem(R.id.menu_delete_note)?.isVisible = false
+            menu.findItem(R.id.menu_copy_note)?.isVisible = false
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 

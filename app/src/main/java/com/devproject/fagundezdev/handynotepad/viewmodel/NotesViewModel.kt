@@ -65,6 +65,10 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
             repository.deleteSelectedNotes()
     }
 
+    fun deleteNote(id: Long?) = viewModelScope.launch {
+        repository.deleteNote(id)
+    }
+
     fun checkBoxUnsuscribed()  = viewModelScope.launch {
         repository.checkBoxUnsuscribed()
     }
@@ -165,19 +169,6 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     //***************************************************************
     fun writeFilesInSDCard(fileDir: File) {
         repository.writeFilesInSDCard(fileDir)
-    }
-
-    fun shareNote(noteID: Long?, title: String, description: String, body: String) {
-        /*// We assume the file we want to load is in the documents/ subdirectory
-// of the internal storage
-File documentsPath = new File(Context.getFilesDir(), "documents");
-File file = new File(documentsPath, "sample.pdf");
-// This can also in one line of course:
-// File file = new File(Context.getFilesDir(), "documents/sample.pdf");
-
-Uri uri = FileProvider.getUriForFile(getContext(), "com.mydomain.fileprovider", file);
-        * */
-
     }
 
 }

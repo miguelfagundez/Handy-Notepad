@@ -2,6 +2,7 @@ package com.devproject.fagundezdev.handynotepad.view.details
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -9,9 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
@@ -64,6 +63,10 @@ class NoteDetailsFragment : Fragment() {
     // Add new note or updating existing note
     var isUpdating = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -75,6 +78,7 @@ class NoteDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.i("Test","Fragments onViewCreated - id = $noteID")
         setupViewModel()
         setupImageDialog()
     }
@@ -93,6 +97,54 @@ class NoteDetailsFragment : Fragment() {
                 setupOptionDialog()
             }
         }
+    }
+
+    //*************************************************
+    // Menu inflater - Action Bar in Details fragment
+    //*************************************************
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        // Invisible - it is visible for home details only
+        menu.findItem(R.id.menu_select_all_settings).isVisible = false
+        menu.findItem(R.id.menu_item_container).isVisible = false
+
+        // Visible - it is visible for note details only
+        menu.findItem(R.id.menu_delete_note)?.isVisible = true
+        menu.findItem(R.id.menu_copy_note)?.isVisible = true
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.menu_delete_note -> {
+                context?.let {
+                    val alertDialog = androidx.appcompat.app.AlertDialog.Builder(it)
+
+                    alertDialog.apply {
+                        setMessage(getString(R.string.dialog_message))
+                        setTitle(getString(R.string.dialog_title))
+                        setPositiveButton(getString(R.string.dialog_delete),
+                            DialogInterface.OnClickListener { dialogInterface, i ->
+                                viewModel.deleteNote(arguments?.getLong(Constants.ID))
+                                toast(getString(R.string.note_deleted))
+                                activity?.onBackPressed()
+                            })
+                        setNegativeButton(getString(R.string.dialog_cancel), DialogInterface.OnClickListener { dialogInterface, i ->
+                            dialogInterface.cancel()
+                        })
+                    }
+                    alertDialog.create()
+                    alertDialog.show()
+
+                }
+
+            }
+            R.id.menu_copy_note -> {}
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupOptionDialog() {
