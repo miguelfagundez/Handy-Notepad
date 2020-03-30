@@ -59,7 +59,7 @@
     <string name="sort_by">Ordenar por</string>
     <string name="file_creating">Procesando la nota..</string>
     <string name="select_app">Seleciona una app:</string>
-    <string name="make_a_copy">Make a copy</string>
-    <string name="note_deleted">Note deleted successfully!</string>
-    <string name="note_copy_successfully">This note has been copied successfully!</string>
+    <string name="make_a_copy">Hacer una copia</string>
+    <string name="note_deleted">Nota borrada satisfactoriamente!</string>
+    <string name="note_copy_successfully">Esta nota ha sido copiada satisfactoriamente!</string>
 </resources>

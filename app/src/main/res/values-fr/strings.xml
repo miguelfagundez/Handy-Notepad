@@ -60,7 +60,7 @@
     <string name="sort_by">Trier par</string>
     <string name="file_creating">Traitement de cette note..</string>
     <string name="select_app">Sélectionnez une appli:</string>
-    <string name="make_a_copy">Make a copy</string>
-    <string name="note_deleted">Note deleted successfully!</string>
-    <string name="note_copy_successfully">This note has been copied successfully!</string>
+    <string name="make_a_copy">Faire une copie</string>
+    <string name="note_deleted">Notes supprimées avec succès!</string>
+    <string name="note_copy_successfully">Cette note a été copiée avec succès!</string>
 </resources>

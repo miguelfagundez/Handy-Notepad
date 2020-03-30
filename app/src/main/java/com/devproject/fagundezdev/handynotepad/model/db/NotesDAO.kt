@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
+import java.time.LocalDateTime
 
 /********************************************
  * Notes Data Access Object
@@ -49,13 +50,13 @@ interface NotesDAO {
     fun getAllNotesByTitleDESC():List<Notes>
 
     // Get the notes order by date (Creation date)
-    @Query("SELECT * FROM notes_table ORDER BY creation_date DESC")
+    @Query("SELECT * FROM notes_table ORDER BY id DESC")
     fun getAllNotesByDateASC():List<Notes>
 
-    @Query("SELECT * FROM notes_table ORDER BY creation_date ASC")
+    @Query("SELECT * FROM notes_table ORDER BY id ASC")
     fun getAllNotesByDateDESC():List<Notes>
 
-    // Get the notes order by date (Last edit)
+    // Get the notes order by date (Last edit) -- Not working
     @Query("SELECT * FROM notes_table ORDER BY edit_date DESC")
     fun getAllNotesByLastEditASC():List<Notes>
 
