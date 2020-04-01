@@ -23,4 +23,10 @@
     <dimen name="dimen_400dp">400dp</dimen>
     <dimen name="dimen_560dp">560dp</dimen>
     <dimen name="size_onboarding_dots">15dp</dimen>
+    <dimen name="dimen_24sp">24sp</dimen>
+    <dimen name="dimen_18sp">18sp</dimen>
+    <dimen name="dimen_0dp">0dp</dimen>
+    <dimen name="dimen_3dp">3dp</dimen>
+    <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_128dp">128dp</dimen>
 </resources>

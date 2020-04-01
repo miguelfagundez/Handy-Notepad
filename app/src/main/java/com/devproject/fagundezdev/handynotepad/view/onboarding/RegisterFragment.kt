@@ -24,12 +24,11 @@ import kotlinx.android.synthetic.main.fragment_register.*
  * *******************************************/
 class RegisterFragment : Fragment() {
 
-    private lateinit var callBack : callPagerRegister
+    //private lateinit var callBack : callPagerRegister
     private lateinit var viewModel : NotesViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callBack = context as callPagerRegister
         setupViewModel()
     }
 
@@ -53,16 +52,12 @@ class RegisterFragment : Fragment() {
 
     private fun setupListeners() {
         ivRegisterArrowBack.setOnClickListener {
-            callBack.callBackThree()
+            activity?.onBackPressed()
         }
 
         btnRegister.setOnClickListener {
             checkRegisterData()
         }
-    }
-
-    interface callPagerRegister{
-        fun callBackThree()
     }
 
     private fun checkRegisterData() {

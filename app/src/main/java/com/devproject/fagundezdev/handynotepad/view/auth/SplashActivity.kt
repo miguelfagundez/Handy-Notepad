@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.view.home.HomeActivity
-import com.devproject.fagundezdev.handynotepad.view.onboarding.OnboardingActivity
+import com.devproject.fagundezdev.handynotepad.view.onboarding.FirstTimeActivity
 import com.devproject.fagundezdev.handynotepad.viewmodel.NotesViewModel
 
 /*************************************************
@@ -53,8 +53,8 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
         }else{
-            // OnBoarding Activity
-            val intent : Intent = Intent(this@SplashActivity, OnboardingActivity::class.java)
+            //First Time Activity
+            val intent : Intent = Intent(this@SplashActivity, FirstTimeActivity::class.java)
             startActivity(intent)
             finish()
         }

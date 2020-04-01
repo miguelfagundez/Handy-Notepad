@@ -11,4 +11,21 @@
     <color name="colorGreenOnboarding">#00E676</color>
     <color name="colorOnboardingBackground">#F6F3F0</color>
     <color name="textButtonOnboardingColor">#FFFFFF</color>
+
+    <!-- Onboarding -->
+    <!-- button colors -->
+    <color name="btnStarColor">#E13936</color>
+    <color name="btnEndColor">#FF7674</color>
+    <color name="btnTextColor">#FFFFFF</color>
+
+    <!-- background color -->
+    <color name="background">#FFFFFF</color>
+
+    <!-- text color -->
+    <color name="txtColorTitle">#000000</color>
+    <color name="txtColorDescription">#656565</color>
+
+    <!-- tab color -->
+    <color name="tabColorDefault">#c0c0c0</color>
+    <color name="tabIndicatorSelectedColor">#E13936</color>
 </resources>

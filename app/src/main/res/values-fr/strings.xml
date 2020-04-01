@@ -63,4 +63,7 @@
     <string name="make_a_copy">Faire une copie</string>
     <string name="note_deleted">Notes supprimées avec succès!</string>
     <string name="note_copy_successfully">Cette note a été copiée avec succès!</string>
+    <string name="title_onboarding">Secure your notes</string>
+    <string name="title_picture_onboarding">Notes with picture</string>
+    <string name="title_memory_onboarding">Save or share your notes</string>
 </resources>

@@ -56,4 +56,9 @@ object Constants {
     const val PERMISSION_IMAGE_CODE = 135
     const val PERMISSION_FILE_CODE = 248
     const val REQUEST_USES_PERMISSIONS = 6248
+
+    //***********************************************************
+    // Onboarding navegation
+    //***********************************************************
+    const val NUM_ONBOARDING_SCREENS = 3
 }
