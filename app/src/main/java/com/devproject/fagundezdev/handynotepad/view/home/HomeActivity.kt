@@ -142,10 +142,10 @@ class HomeActivity : AppCompatActivity() {
         menu?.let {menu ->
             menu.findItem(R.id.menu_delete_note)?.isVisible = false
             menu.findItem(R.id.menu_copy_note)?.isVisible = false
-            //**********************************
-            //  -- Need to check Date format --
+            //***********************************************
+            //  -- Need to check Last edit (Date format) --
             // -- For managing sort correctly --
-            //**********************************
+            //***********************************************
             menu.findItem(R.id.menu_order_last_edit_asc).isVisible = false
             //menu.findItem(R.id.menu_order_date_desc).isVisible = false
             //menu.findItem(R.id.menu_order_date_asc).isVisible = false
@@ -206,10 +206,10 @@ class HomeActivity : AppCompatActivity() {
             }
 
             // MENU: Sort by last_edit
-            R.id.menu_order_last_edit_asc ->{
-                viewModel.getListNotesLastEditAsc()?.let { listAsc ->
-                    adapter.setNotes(listAsc)
-                }}
+            //R.id.menu_order_last_edit_asc ->{
+                //viewModel.getListNotesLastEditAsc()?.let { listAsc ->
+                    //adapter.setNotes(listAsc)
+                //}}
 
         }
         return super.onOptionsItemSelected(item)

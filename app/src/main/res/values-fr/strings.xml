@@ -33,7 +33,7 @@
     <string name="permissions_for_images">Les autorisations sont nécessaires pour gérer les images et les fichiers</string>
     <string name="one_time_register">Une seule inscription. Protégez vos notes avec un nom d\'utilisateur et un mot de passe.</string>
     <string name="notes_pictures">Enregistrez vos notes avec une photo. Depuis la galerie ou l\'appareil photo.</string>
-    <string name="notes_external_card">Envoyez vos notes au téléphone à mémoire interne.</string>
+    <string name="notes_external_card">Envoyez vos notes au téléphone à mémoire interne ou partager avec des amis.</string>
     <string name="dialog_delete">Supprimer</string>
     <string name="dialog_cancel">Annuler</string>
     <string name="dialog_message">Voulez-vous vraiment supprimer ces notes?</string>
@@ -63,7 +63,7 @@
     <string name="make_a_copy">Faire une copie</string>
     <string name="note_deleted">Notes supprimées avec succès!</string>
     <string name="note_copy_successfully">Cette note a été copiée avec succès!</string>
-    <string name="title_onboarding">Secure your notes</string>
-    <string name="title_picture_onboarding">Notes with picture</string>
-    <string name="title_memory_onboarding">Save or share your notes</string>
+    <string name="title_onboarding">Sécurisez vos notes</string>
+    <string name="title_picture_onboarding">Notes avec photo</string>
+    <string name="title_memory_onboarding">Partagez vos notes</string>
 </resources>

@@ -63,6 +63,8 @@ class NoteDetailsFragment : Fragment() {
     var firstTime = true
     // Add new note or updating existing note
     var isUpdating = false
+    // Avoiding saving data two times
+    var isDataAvailableForSaving = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -142,22 +144,36 @@ class NoteDetailsFragment : Fragment() {
 
             }
             R.id.menu_copy_note -> {
-                // Last edit date
-                val simpleStringDate = DateUtils.toSimpleString()
-                // New note
-                noteID = null
-                title = "Copy " + etDetailsTitle.text.toString()
-                description = etDetailsDescription.text.toString()
-                body = etDetailsBody.text.toString()
-                priority = 1
-                isSelected = false
-                edit_date = simpleStringDate
-                creation_date = simpleStringDate
-                firstTime = false
-                isUpdating = true
-                // Saving the data into Room
-                noteID = viewModel.insert(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
-                toast(getString(R.string.note_copy_successfully))
+                if(etDetailsTitle.text.isNotBlank()) {
+                    // Last edit date
+                    val simpleStringDate = DateUtils.toSimpleString()
+                    // New note
+                    noteID = null
+                    title = "Copy " + etDetailsTitle.text.toString()
+                    description = etDetailsDescription.text.toString()
+                    body = etDetailsBody.text.toString()
+                    priority = 1
+                    isSelected = false
+                    edit_date = simpleStringDate
+                    creation_date = simpleStringDate
+                    firstTime = false
+                    isUpdating = true
+                    // Saving the data into Room
+                    noteID = viewModel.insert(
+                        noteID,
+                        title,
+                        description,
+                        body,
+                        image_url,
+                        priority,
+                        isSelected,
+                        creation_date,
+                        edit_date
+                    )
+                    toast(getString(R.string.note_copy_successfully))
+                }else{
+                    toast(getString(R.string.title_msg_empty))
+                }
             }
         }
 
@@ -286,6 +302,7 @@ class NoteDetailsFragment : Fragment() {
         var closeFragment = false
         isUpdating = arguments?.getBoolean(Constants.IS_ADD_NOTE)?:false
         firstTime = true
+        isDataAvailableForSaving = false
 
         cleanComponents()
 
@@ -352,16 +369,19 @@ class NoteDetailsFragment : Fragment() {
             fabDetailsDone.setImageResource(R.drawable.ic_edit)
             fabDetailsDone.setOnClickListener {
 
-                setEditableComponents(true)
                 fabDetailsDone.setImageResource(R.drawable.ic_done)
+                setEditableComponents(true)
 
                 if(etDetailsTitle.text.isNotBlank()){
-                    saveData()
+                    if (isDataAvailableForSaving == true){
+                        saveData()
+                        toast(getString(R.string.info_saved))
+                    }
                     if(closeFragment == true){
                         activity?.onBackPressed()
                     }
-                    toast(getString(R.string.info_saved))
                     closeFragment = true
+                    isDataAvailableForSaving = true
                 }else{
                     toast(getString(R.string.title_msg_empty))
                 }
@@ -409,7 +429,9 @@ class NoteDetailsFragment : Fragment() {
 
         // Knowing if data is updating or new
         if (isUpdating == true){
+            //*****************
             // Updating
+            //*****************
             when(firstTime){
                 true -> noteID = arguments?.getLong(Constants.ID)
                 else -> Timber.i("isUpdating == true and noteID = $noteID")
@@ -424,7 +446,9 @@ class NoteDetailsFragment : Fragment() {
             viewModel.update(noteID, title, description, body, image_url,priority, isSelected, creation_date, edit_date)
 
         }else{
+            //****************
             // New note
+            //****************
             noteID = null
             title = etDetailsTitle.text.toString()
             description = etDetailsDescription.text.toString()
@@ -440,8 +464,7 @@ class NoteDetailsFragment : Fragment() {
 
     }
 
-
-    // Update: value -> false
+    // Update Note: value -> false
     // New Note: value -> true
     fun setEditableComponents(value: Boolean){
         etDetailsBody.isEnabled = value
