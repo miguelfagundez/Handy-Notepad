@@ -48,7 +48,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         note.body = body
         note.image_url = imageUrl
         note.priority = priority
-        note.isSelected = selected?:false
+        note.isSelected = selected
         note.creation_date = creationDate
         note.edit_date = editDate
 
@@ -64,7 +64,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         return notesDao?.insertNote(createNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate))?:0
     }
 
-    suspend fun updateNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
+    fun updateNote(id: Long?, title: String, description: String, body: String, imageUrl: String,
                            priority: Int, selected: Boolean, creationDate: String, editDate: String){
         notesDao?.insertNote(createNote(id, title, description, body, imageUrl, priority, selected, creationDate, editDate))
     }
@@ -92,7 +92,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
         if (size >= 0){
             for(i in 0..size){
                 if(notes?.get(i)?.isSelected == true) {
-                    notesDao?.deleteNote(notes.get(i))
+                    notesDao?.deleteNote(notes[i])
                     numberNotes -= 1
                 }
             }
@@ -106,8 +106,8 @@ class NotesRepository(private val notesDao:NotesDAO?) {
 
         for(i in 0..size){
             if(notes?.get(i)?.isSelected == true) {
-                notes?.get(i)?.isSelected = false
-                notesDao?.updateNote(notes.get(i))
+                notes[i]?.isSelected = false
+                notesDao?.updateNote(notes[i])
             }
         }
     }
@@ -138,12 +138,6 @@ class NotesRepository(private val notesDao:NotesDAO?) {
     fun getListNotesDateDesc() : List<Notes>? {
         return notesDao?.getAllNotesByDateDESC()
     }
-
-    // LAST_EDIT
-    fun getListNotesLastEditAsc() : List<Notes>? {
-        return notesDao?.getAllNotesByLastEditASC()
-    }
-
 
     //*********************************************
     // Share preferences
@@ -184,7 +178,7 @@ class NotesRepository(private val notesDao:NotesDAO?) {
 
     // Writing notes in a files into SD Card
     fun writeFilesInSDCard(fileDir: File) {
-        val job = GlobalScope.launch {
+        GlobalScope.launch {
             val notes = notesDao?.getAllNotesByPriorityASC()
             val number = notesDao?.getNumberNotes()?:0
             fileDir.mkdir()
@@ -201,6 +195,11 @@ class NotesRepository(private val notesDao:NotesDAO?) {
                 }
             }
         }
+    }
+
+    // Return number of notes into Room DB
+    fun getNumberOfNotes():Int?{
+        return notesDao?.getNumberNotes()
     }
 
 

@@ -4,11 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.devproject.fagundezdev.handynotepad.utils.Constants
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import java.security.AccessControlContext
 
 /********************************************
  * Notes Database
@@ -26,7 +22,7 @@ abstract class NotesDatabase : RoomDatabase() {
 
         private var INSTANCE: NotesDatabase? = null
 
-        fun getInstance(context: Context, scope: CoroutineScope): NotesDatabase? {
+        fun getInstance(context: Context): NotesDatabase? {
 
             val tempInstance = INSTANCE
 

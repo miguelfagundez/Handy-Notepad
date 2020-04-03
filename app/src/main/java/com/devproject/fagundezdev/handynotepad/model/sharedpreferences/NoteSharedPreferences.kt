@@ -31,11 +31,6 @@ object NoteSharedPreferences {
         editor?.apply()
     }
 
-    fun write(key:String, value:Int){
-        val editor = sharedPreferences?.edit()
-        editor?.putInt(key, value)
-        editor?.apply()
-    }
     fun write(key:String, value:Boolean){
         val editor = sharedPreferences?.edit()
         editor?.putBoolean(key, value)
@@ -50,15 +45,8 @@ object NoteSharedPreferences {
         return sharedPreferences?.getBoolean(key,false)
     }
 
-    fun readInt(key:String):Int? {
-        return sharedPreferences?.getInt(key,-1)
-    }
-
     fun readString(key:String):String? {
         return sharedPreferences?.getString(key,"none")
     }
-
-
-
 
 }

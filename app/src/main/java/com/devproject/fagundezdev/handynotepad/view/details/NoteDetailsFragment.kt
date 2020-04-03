@@ -249,7 +249,7 @@ class NoteDetailsFragment : Fragment() {
                 listPermissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
 
-            if (!listPermissions.isEmpty()){
+            if (listPermissions.isNotEmpty()){
                 requestPermissions(listPermissions.toTypedArray<String>(), Constants.PERMISSION_IMAGE_CODE)
                 return false
             }
@@ -358,10 +358,7 @@ class NoteDetailsFragment : Fragment() {
                     if (image.isNullOrEmpty()||image.isNullOrBlank()){
                         Glide.with(ivDetailsImage).load(R.drawable.ic_launcher_foreground).into(ivDetailsImage)
                     }else{
-
                         Glide.with(ivDetailsImage).load(image).into(ivDetailsImage)
-                        /*val imageUri : Uri? = image.toUri()
-                        ivDetailsImage.setImageURI(imageUri)*/
                     }
                 }
             }

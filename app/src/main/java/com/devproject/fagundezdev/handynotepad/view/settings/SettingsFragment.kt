@@ -28,6 +28,7 @@ import kotlin.collections.ArrayList
  * Fragment - NoteDetailsFragment
  * This fragment will manage app's setting
  *     ----- Under construction -----
+ *   --Permissions needs to be checked--
  * @author: Miguel Fagundez
  * @date: March 14th, 2020
  * @version: 1.0
@@ -106,12 +107,6 @@ class SettingsFragment : Fragment() {
     }
 
 
-
-    /*FragmentManager fm = getActivity().getSupportFragmentManager();
-      for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
-        fm.popBackStack();
-      }   */
-
     //***********************************************************************************
     //                              CHECKING PERMISSIONS
     //***********************************************************************************
@@ -119,11 +114,7 @@ class SettingsFragment : Fragment() {
     private fun checkPermissions(): Boolean {
         activity?.let {fragmentActivity ->
             val writeExternalPermision = ContextCompat.checkSelfPermission(fragmentActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            if(writeExternalPermision == PackageManager.PERMISSION_GRANTED) {
-                return true
-            }else {
-                return false
-            }
+            return writeExternalPermision == PackageManager.PERMISSION_GRANTED
         }
         return false
     }

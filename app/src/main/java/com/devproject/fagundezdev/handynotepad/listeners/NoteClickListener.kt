@@ -5,7 +5,7 @@ package com.devproject.fagundezdev.handynotepad.listeners
  * Listener - NoteClickListener
  * Connect AdapterClass with HomeActivity
  * @author: Miguel Fagundez
- * @date: March 06th, 2020
+ * @date: March 12th, 2020
  * @version: 1.0
  * *******************************************/
 interface NoteClickListener {

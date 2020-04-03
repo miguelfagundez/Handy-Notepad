@@ -10,6 +10,13 @@ import androidx.viewpager.widget.PagerAdapter
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.view.onboarding.OnboardingData
 
+/********************************************
+ * Adapter - FirstTimePagerAdapter
+ * Adpater for Onboarding screens
+ * @author: Miguel Fagundez
+ * @date: March 30th, 2020
+ * @version: 1.0
+ * *******************************************/
 class FirstTimePagerAdapter(var context : Context, var mListPager : ArrayList<OnboardingData>) : PagerAdapter() {
 
 

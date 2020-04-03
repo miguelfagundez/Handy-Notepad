@@ -56,10 +56,6 @@ interface NotesDAO {
     @Query("SELECT * FROM notes_table ORDER BY id ASC")
     fun getAllNotesByDateDESC():List<Notes>
 
-    // Get the notes order by date (Last edit) -- Not working
-    @Query("SELECT * FROM notes_table ORDER BY edit_date DESC")
-    fun getAllNotesByLastEditASC():List<Notes>
-
     @Query("SELECT * FROM notes_table GROUP BY isSelected")
     suspend fun getAllNotesByGroup():List<Notes>
 

@@ -1,13 +1,9 @@
 package com.devproject.fagundezdev.handynotepad.viewmodel
 
 import android.app.Application
-import android.util.Log
-import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.devproject.fagundezdev.handynotepad.BuildConfig
 import com.devproject.fagundezdev.handynotepad.R
 import com.devproject.fagundezdev.handynotepad.model.db.Notes
 import com.devproject.fagundezdev.handynotepad.model.db.NotesDatabase
@@ -15,10 +11,7 @@ import com.devproject.fagundezdev.handynotepad.model.sharedpreferences.NoteShare
 import com.devproject.fagundezdev.handynotepad.repositories.NotesRepository
 import com.devproject.fagundezdev.handynotepad.utils.ResponseObj
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 /********************************************
  * ViewModel - NotesViewModel
@@ -31,11 +24,12 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
 
     private val repository : NotesRepository
     val listNotes : LiveData<List<Notes>>?
+    // This should not be here - Temporal
     val context = application.applicationContext
 
     init {
         NoteSharedPreferences.getSharedPreferences(context)
-        val notesDao = NotesDatabase.getInstance(application, viewModelScope)?.NotesDao()
+        val notesDao = NotesDatabase.getInstance(application)?.NotesDao()
         repository = NotesRepository(notesDao)
         listNotes = repository.listNotes
     }
@@ -77,6 +71,10 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
         repository.selectAllNotes(value)
     }
 
+    fun getNumberOfNotes():Int?{
+        return repository.getNumberOfNotes()
+    }
+
     //***************************************************************
     // Helper function to sort database data
     //***************************************************************
@@ -98,12 +96,6 @@ class NotesViewModel(application: Application):AndroidViewModel(application) {
     fun getListNotesDateDesc() : List<Notes>? {
         return repository.getListNotesDateDesc()
     }
-
-    // LAST_EDIT
-    fun getListNotesLastEditAsc() : List<Notes>? {
-        return repository.getListNotesLastEditAsc()
-    }
-
 
     //***************************************************************
     // Shared Preferences access methods

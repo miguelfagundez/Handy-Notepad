@@ -46,8 +46,6 @@ class HomeActivity : AppCompatActivity() {
     private var checkBoxPressed = 0
     // Set all selected items
     private var allNotesChecked = false
-    // Sorting value
-    private var isAscending = true
 
     //*****************************
     // Notes variables, Temp data
@@ -175,7 +173,7 @@ class HomeActivity : AppCompatActivity() {
                 allNotesChecked = !allNotesChecked
 
                 when(allNotesChecked){
-                    true ->  checkBoxPressed = 1
+                    true ->  checkBoxPressed = viewModel.getNumberOfNotes()?:0
                     else -> checkBoxPressed = 0
                 }
                 viewModel.selectAllNotes(allNotesChecked)
@@ -204,13 +202,6 @@ class HomeActivity : AppCompatActivity() {
                     adapter.setNotes(listDesc)
                 }
             }
-
-            // MENU: Sort by last_edit
-            //R.id.menu_order_last_edit_asc ->{
-                //viewModel.getListNotesLastEditAsc()?.let { listAsc ->
-                    //adapter.setNotes(listAsc)
-                //}}
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -242,7 +233,6 @@ class HomeActivity : AppCompatActivity() {
         //****************************************
         fabDeleteNotes.setOnClickListener {
             if (checkBoxPressed > 0){
-                Timber.i("Entre a borrar")
                 //******************************
                 // Create an Alert Dialog
                 // Asking about to delete notes
@@ -271,9 +261,9 @@ class HomeActivity : AppCompatActivity() {
 
 
     override fun onPause() {
-        // Avoiding databse problems
+        // Avoiding database problems
         viewModel.checkBoxUnsuscribed()
-        // Cleaning UI checkboxs
+        // Cleaning UI checkboxes
         checkBoxPressed = 0
         super.onPause()
     }
