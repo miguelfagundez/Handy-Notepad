@@ -138,6 +138,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Invisible - it is visible for note details only
         menu?.let {menu ->
+            menu.findItem(R.id.menu_action_settings).isVisible = true
             menu.findItem(R.id.menu_delete_note)?.isVisible = false
             menu.findItem(R.id.menu_copy_note)?.isVisible = false
             //***********************************************

@@ -4,9 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -53,10 +51,22 @@ class SettingsFragment : Fragment() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Avoiding call settings screen many times
+        menu.findItem(R.id.menu_action_settings).isVisible = false
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
     }
 
+    //****************************************************************************************
     // TEMPORAL
     private fun setupListeners() {
         // Export files option
@@ -76,7 +86,7 @@ class SettingsFragment : Fragment() {
 
                     // Calling ViewModel to write the files
                     viewModel.writeFilesInSDCard(fileDir)
-
+                    toast(getString(R.string.files_exported_msg))
                 } else {
                     // If permissions are not granted
                     // we request these permissions (READ and WRITE External Storage)
@@ -86,7 +96,6 @@ class SettingsFragment : Fragment() {
                 // No SD Card is detected
                 toast(getString(R.string.sd_card_detected_msg))
             }
-            toast(getString(R.string.files_exported_msg))
             //**************************************************************************************
         }
 
