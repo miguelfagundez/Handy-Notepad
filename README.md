@@ -3,6 +3,8 @@ Architecture components, ViewModel, Glide, Permissions, Room DB, Shared Preferen
 
 Simple notepad app - v1.0
 
+**Status:** *Pending publish on Google Play Store*
+
 ### Visual results and code structure
 <p align="center">
 <img src="images/onboarding01.png" width="300"> - <img src="images/onboarding02.png" width="300"> 
